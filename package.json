@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "examples/*"
+  ],
+  "scripts": {
+    "build": "npm run build:react",
+    "build:react": "cd packages/exma-react && npm run build"
+  },
+  "devDependencies": {
+    "concurrently": "7.6.0"
+  }
+}

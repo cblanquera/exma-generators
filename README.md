@@ -1,2 +1,3 @@
-# exma-react
-React Generator using Exma Schema
+# exma-generators
+
+My collection of exma generators
