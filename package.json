@@ -5,8 +5,9 @@
     "examples/*"
   ],
   "scripts": {
-    "build": "npm run build:frui",
-    "build:frui": "cd packages/exma-frui && npm run build"
+    "build": "npm run build:frui && npm run build:prisma",
+    "build:frui": "cd packages/exma-frui && npm run build",
+    "build:prisma": "cd packages/exma-prisma && npm run build"
   },
   "devDependencies": {
     "concurrently": "7.6.0"

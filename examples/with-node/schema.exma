@@ -1,0 +1,304 @@
+generator "exma-typescript" {
+  ts true
+  output "./types.ts"
+}
+
+generator "exma-frui" {
+  ui "tailwind"
+  ts true
+  output "./react"
+  types "./types.ts"
+}
+
+generator "exma-prisma" {
+  generator { client { provider "prisma-client-js" } }
+  db { provider "cockroachdb" url ["DATABASE_URL"] }
+  output "./schema.prisma"
+}
+
+enum Roles {
+  ADMIN   "ADMIN"
+  MANAGER "MANAGER"
+  USER    "USER"
+}
+
+enum Status {
+  PENDING "Pending"
+  OPEN    "Open"
+  CLOSE   "Close"
+}
+
+prop RoleProps {
+  options [
+    { label "Admin" value "ADMIN" }
+    { label "Manager" value "MANAGER" }
+    { label "User" value "USER" }
+  ]
+}
+
+prop StatusProps {
+  options [
+    { label "Pending" value "PENDING" }
+    { label "Open" value "OPEN" }
+    { label "Close" value "CLOSE" }
+  ]
+}
+
+prop PriceProps {
+  min "0"
+}
+
+prop ItemsProps {
+  type "number"
+  min "1"
+  step "1"
+}
+
+type Item {
+  name     String
+  currency String
+  unit     Float
+  quantity Integer 
+}
+
+type Line {
+  name     String
+  currency String
+  price    Float
+}
+
+model User @label("User" "Users") {
+  id        String   @label("ID")         
+                     @db.char(21) @id @default("cuid()")
+
+  username  String   @label("Username")   
+                     @db.varchar(255) @unique @searchable             
+                     @field.text
+
+  companyId String?  @label("Company")    
+                     @db.char(21) @relation("Company" "id" "company")    
+                     @field.modelcomplete("Company" "id" "name") 
+
+  name      String   @label("Name")       
+                     @db.varchar(255) @searchable                     
+                     @field.text
+
+  role      Roles    @label("Role") 
+                     @db.varchar(255) @default("USER") @filterable 
+                     @is.option(["ADMIN" "MANAGER" "USER"] "Should be a valid option") 
+                     @field.select(RoleProps) @list.lowercase @view.lowercase 
+
+  active    Boolean  @label("Active")     
+                     @default(true) @filterable
+                     @field.switch @list.yesno @view.yesno
+
+  lastLogin Datetime @label("Last Login") 
+                     @default("now()")
+                     @list.date
+
+  created   Datetime @label("Created")
+                     @default("now()") @filterable @sortable
+                     @list.date
+
+  updated   Datetime @label("Updated")
+                     @default("now()") @datestamp @filterable @sortable 
+                     @list.date
+}
+
+model Company @label("Company" "Companies") {
+  id         String   @label("ID")        
+                      @db.char(21) @id @default("cuid()")
+  
+  name       String   @label("Name")       
+                      @db.varchar(255) @unique @searchable
+                      @field.text
+  
+  country    String   @label("Country")
+                      @db.char(2) @filterable
+                      @field.country
+  
+  address    String?  @label("Address")
+                      @db.varchar(255)
+                      @field.text @list.hide
+  
+  contact    String?  @label("Contact")
+                      @db.varchar(255)
+                      @field.text
+  
+  email      String?  @label("Email")
+                      @db.varchar(255)
+                      @field.email @list.email @view.email
+                      @is.email("Should be an email")
+  
+  phone      String?  @label("Phone")
+                      @db.varchar(255)
+                      @field.phone @list.phone @view.phone
+  
+  files      String[] @label("Files")
+                      @field.filelist @list.hide @view.line
+  
+  references Hash?    @label("References")
+                      @field.metadata @list.hide @view.metadata
+  
+  supplier   Boolean  @label("Supplier")
+                      @default(false)
+                      @field.switch @list.yesno @view.yesno
+  
+  approved   Boolean  @label("Approved")
+                      @default(false)
+                      @field.switch @list.yesno @view.yesno
+  
+  active     Boolean  @label("Active")
+                      @default(true) @filterable
+                      @field.switch @list.yesno @view.yesno
+  
+  created    Datetime @label("Created")
+                      @default("now()") @filterable @sortable
+                      @list.date
+  
+  updated    Datetime @label("Updated")
+                      @default("now()")
+                      @datestamp @filterable @sortable @list.date
+}
+
+model Term  @label("Term" "Terms") {
+  name String @label("Name") 
+              @id @db.varchar(255)
+  
+  type String @label("Type")
+              @db.varchar(255)
+}
+
+model Request @label("Request" "Requests") {
+  id          String    @label("ID")
+                        @db.char(21) @id @default("cuid()")
+
+  companyId   String    @label("Company")
+                        @db.char(21) @relation("Company" "id" "company")
+                        @field.modelcomplete("Company" "id" "name") 
+
+  address     String?   @label("Address")
+                        @db.varchar(255)
+                        @field.text @list.hide
+
+  contact     String?   @label("Contact")
+                        @db.varchar(255)
+                        @field.text
+
+  email       String?   @label("Email")
+                        @db.varchar(255)
+                        @is.email("Should be an email")
+                        @field.text @list.email @view.phone
+
+  phone       String?   @label("Phone")
+                        @db.varchar(255)
+                        @field.text @list.email @view.phone
+
+  description String?   @label("Description") 
+                        @db.text @searchable
+                        @field.textarea @list.hide
+
+  memo        String?   @label("Memo")
+                        @db.text @searchable
+                        @field.textarea @list.hide
+
+  currency    String    @label("Currency")
+                        @db.char(3) @filterable
+                        @field.currency
+
+  budget      Float     @label("Budget")
+                        @db.float(10 2) @default(0) @unsigned @filterable @sortable 
+                        @is.number @is.gt(0 "Should be more than zero")
+                        @field.price(PriceProps) @list.price @view.price
+
+  starts      Datetime  @label("Starts")
+                        @default("now()") @sortable
+                        @field.datetime @list.date @view.date
+
+  expires     Datetime  @label("Expires")
+                        @default("+30 days") @sortable
+                        @is.future("Should be in the future")
+                        @field.datetime @list.date @view.date
+
+  sla         Datetime? @label("SLA")
+                        @sortable
+                        @field.datetime @list.date @view.date
+                        @is.future("Should be in the future")
+
+  items       Item[]    @label("Items")
+                        @field.fieldset("Item" true) @list.hide @view.table 
+
+  lines       Line[]    @label("Lines")
+                        @field.fieldset("Line" true) @list.hide @view.table
+
+  terms       String[]  @label("Terms")
+                        @field.textlist @list.hide @view.line
+
+  files       Hash      @label("Files")
+                        @field.filelsit @list.hide @view.line
+
+  status      Status    @label("Status")
+                        @default("OPEN") @filterable
+                        @field.select(StatusProps) @list.lowercase @view.lowercase
+
+  active      Boolean   @label("Active")
+                        @default(true) @filterable
+                        @field.switch @list.yesno @view.yesno
+
+  created     Datetime  @label("Created")
+                        @default("now()") @filterable @sortable
+                        @list.date
+
+  updated     Datetime  @label("Updated")
+                        @default("now()") @datestamp @filterable @sortable
+                        @list.date
+}
+
+model Quote @label("Quote" "Quotes") {
+  id          String    @label("ID")
+                        @db.char(21) @id @default("cuid()")
+
+  companyId   String    @label("Company") 
+                        @db.char(21) @relation("Company" "id" "company")
+                        @field.modelcomplete("Company" "id" "name") 
+
+  requestId   String    @label("Request") 
+                        @db.char(21) @relation("Request" "id" "description")
+                        @field.modelcomplete("Request" "id" "description") 
+
+  memo        String?   @label("Memo")
+                        @db.text @searchable
+                        @field.textarea @list.hide
+
+  price       Float     @label("Price")
+                        @db.float(10 2) @default(0) @unsigned @filterable @sortable 
+                        @field.price(PriceProps) @list.price @view.price
+
+  items       Integer   @label("Items")
+                        @db.int(10) @default(0) @unsigned @filterable @sortable
+                        @field.text(ItemsProps)
+
+  lines       Line[]    @label("Lines")
+                        @field.fieldset("Line" true) @list.hide @view.table
+
+  expires     Datetime? @label("Expires") @default("+30 days") @sortable
+                        @field.datetime @list.date @view.date
+
+  sla         String?   @label("SLA")
+                        @field.text
+
+  terms       String[]  @label("Terms")
+                        @field.textlist @list.hide @view.line
+
+  files       Hash      @label("Files")
+                        @field.filelsit @list.hide @view.line
+
+  active      Boolean   @label("Active")  @default(true) @filterable
+                        @field.switch @list.yesno @view.yesno
+
+  created     Datetime  @label("Created") @default("now()") @filterable @sortable
+                        @list.date
+
+  updated     Datetime  @label("Updated") @default("now()") @datestamp @filterable @sortable
+                        @list.date
+}

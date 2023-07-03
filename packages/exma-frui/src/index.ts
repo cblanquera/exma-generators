@@ -6,7 +6,7 @@ import { Loader } from 'exma';
 
 import Enum from './types/Enum';
 import Prop from './types/Prop';
-import Type from './types/Model';
+import Type from './types/Type';
 import Model from './types/Model';
 
 //client generators

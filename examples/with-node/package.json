@@ -1,6 +1,6 @@
 {
-  "name": "with-react",
-  "version": "0.0.11",
+  "name": "with-node",
+  "version": "0.0.12",
   "private": true,
   "scripts": {
     "generate": "exma",
@@ -11,17 +11,18 @@
     "@paralleldrive/cuid2": "2.2.1",
     "axios": "1.4.0",
     "cuid": "3.0.0",
-    "frui": "0.0.16",
+    "frui": "0.0.17",
     "nanoid": "4.0.2",
-    "r22n": "1.0.2",
+    "r22n": "1.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/node": "20.2.5",
-    "exma": "0.0.11",
-    "exma-frui": "0.0.11",
-    "exma-typescript": "0.0.11",
+    "exma": "0.0.12",
+    "exma-frui": "0.0.12",
+    "exma-prisma": "0.0.12",
+    "exma-typescript": "0.0.12",
     "ts-node": "10.9.1",
     "typescript": "5.0.4"
   }

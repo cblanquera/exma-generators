@@ -16,17 +16,17 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
-"@exma/generator@0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@exma/generator/-/generator-0.0.11.tgz#f2d4efcbca791886bd8c6a555829851fdea2fa30"
-  integrity sha512-b7+KjbvxCgJfNmK22lkgfuoTIvAS06RBQ+V5d6RayI+3rqRAPfTlu+odvY6QAmeEWFu6U/IW590hdtjWpRv9Tw==
+"@exma/generator@0.0.12":
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/@exma/generator/-/generator-0.0.12.tgz#57296dbc8f62981d79978c46272b8f81c2019973"
+  integrity sha512-gvUfqkWJlI7i3btN3I/2MmwxT8LYk5MhXojLuQWQt6GOZV7YGk7HiEadAJM3MDYjhpu2J7TTdluFsbA03C17zQ==
   dependencies:
-    "@exma/parser" "0.0.11"
+    "@exma/parser" "0.0.12"
 
-"@exma/parser@0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@exma/parser/-/parser-0.0.11.tgz#5e421a4126a6595d04c4c802bd914d2db3655ab5"
-  integrity sha512-LT7oodOzcsOy3CPAt9mCjASSTF7E7TwY1e8NCnHEOVmlliSOE1sdTQmN/eue9bbdAB/eLE13FjCsciUNSAGCOA==
+"@exma/parser@0.0.12":
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/@exma/parser/-/parser-0.0.12.tgz#21bd51a3ccee6a864ec28b142ee2b6eafc7c9d7a"
+  integrity sha512-TgGf/GYI4+kmkwGY05uW3kLge+IlM92myKnH7yaMLJeVD1X0l+wCvfWayRP+yeiDGH1GjdBc35rtK5uF1D0KJw==
 
 "@inceptjs/types@0.0.29":
   version "0.0.29"
@@ -312,21 +312,21 @@ escalade@^3.1.1:
   resolved "https://registry.yarnpkg.com/escalade/-/escalade-3.1.1.tgz#d8cfdc7000965c5a0174b4a82eaa5c0552742e40"
   integrity sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==
 
-exma-typescript@0.0.11:
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/exma-typescript/-/exma-typescript-0.0.11.tgz#baf6a96608100c106b8c659c572c87d513f5d04b"
-  integrity sha512-Af1Rr/IgPBMsv5HZHTgLn6iBM4hotO9arP5+9j4dR9uF0FSWfx7YfVDkNMOkxxsf5Ikk7I50C6d66E+aw19e8A==
+exma-typescript@0.0.12:
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/exma-typescript/-/exma-typescript-0.0.12.tgz#81b6732090b229d5d0dc63854a59bac0bfc93ddc"
+  integrity sha512-UAm3/PTQMT0bHngigespUpCHXzvU7u4twxqGXgL8PwbMaDubTBCxJRssSqV1ArENre0cudCKT5KsZVZbF8tmsA==
   dependencies:
-    exma "0.0.11"
+    exma "0.0.12"
     ts-morph "18.0.0"
 
-exma@0.0.11:
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/exma/-/exma-0.0.11.tgz#84229ea7422d8df865ae33dc16a2a83cb9c768cc"
-  integrity sha512-jYmkEF07GBldOy5/gMEz9pI/dH5QN+zFEpGDDonU2HnO9CxDH/orn6UGY6Nf+nOdQsPqsWuyCEbEDmUPF8fTpQ==
+exma@0.0.12:
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/exma/-/exma-0.0.12.tgz#e7325e21118ca526e8ab7824dcbb03f289c6211b"
+  integrity sha512-25zZSy6zpZS6t0cfwWRGK9w3YQ4jvcT+OnNrHb34tLpVGnU78Y+6VQjmMj24mNltXW7K314byDJEWX5Yb1oR2g==
   dependencies:
-    "@exma/generator" "0.0.11"
-    "@exma/parser" "0.0.11"
+    "@exma/generator" "0.0.12"
+    "@exma/parser" "0.0.12"
 
 fast-glob@^3.2.12:
   version "3.3.0"
@@ -367,10 +367,10 @@ form-data@^4.0.0:
     combined-stream "^1.0.8"
     mime-types "^2.1.12"
 
-frui@0.0.16:
-  version "0.0.16"
-  resolved "https://registry.yarnpkg.com/frui/-/frui-0.0.16.tgz#779e322cdb223e4064f97cbc9a6caa53ac1ba036"
-  integrity sha512-HHypx9amvFsjJmC8abZrzk+DDgvxI1HjEOzLafOJHAWuVXjDJJhcfFd5hZ3kkQm5zYmyQMhGMBSkuY99fiPFIw==
+frui@0.0.17:
+  version "0.0.17"
+  resolved "https://registry.yarnpkg.com/frui/-/frui-0.0.17.tgz#d337391ed52df61c8f0e11d7ee2a03ed951009ec"
+  integrity sha512-zzvK0PY8JQ7YS5XG0YZRIxf9VC8s+OAFqLgo7bJUVgAGF9VxzDzXMfQ3nrHMRcl6q9Ga5R8Ajm4cEo00ttLvzA==
   dependencies:
     inputmask "5.0.8"
     markdown-to-jsx "7.2.0"
@@ -514,10 +514,10 @@ queue-microtask@^1.2.2:
   resolved "https://registry.yarnpkg.com/queue-microtask/-/queue-microtask-1.2.3.tgz#4929228bbc724dfac43e0efb058caf7b6cfb6243"
   integrity sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==
 
-r22n@1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/r22n/-/r22n-1.0.2.tgz#edac979c55b1a5880bd1319c19f2658386b5e755"
-  integrity sha512-7wdZ3wlYSrCTL1G6+2ugv+EWscUv9IyfQiXzAqHA8v6GwwoO/rEuBgiQmeVMw154pJE/0DX+WDoT0Rfpamzsfg==
+r22n@1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/r22n/-/r22n-1.0.3.tgz#fc4d8d03a533da52da6727fecf96d3b402bfe96f"
+  integrity sha512-rn1l6m9HXuGbbP5Odsm0I5pWVwSMTEPFx/o1KBdaDBkiQ3OiHL7QqX8V6omnDKJMNRcGZF+Hn64SMs5EgOQm4A==
   dependencies:
     react "18.2.0"
     react-dom "18.2.0"
