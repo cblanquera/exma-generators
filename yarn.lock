@@ -16,17 +16,17 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
-"@exma/generator@0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@exma/generator/-/generator-0.0.4.tgz#e294d6d7484306fb1b5950023e84a2db75bf390b"
-  integrity sha512-VN7HBXEEtvER2+SeYVz07L0N9+Q08+bJtrreycy/3V2Y5JTD2TZoYzs0yXmMY7SRFRJfkwQd1fItUKjywttuQw==
+"@exma/generator@0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@exma/generator/-/generator-0.0.11.tgz#f2d4efcbca791886bd8c6a555829851fdea2fa30"
+  integrity sha512-b7+KjbvxCgJfNmK22lkgfuoTIvAS06RBQ+V5d6RayI+3rqRAPfTlu+odvY6QAmeEWFu6U/IW590hdtjWpRv9Tw==
   dependencies:
-    "@exma/parser" "0.0.4"
+    "@exma/parser" "0.0.11"
 
-"@exma/parser@0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@exma/parser/-/parser-0.0.4.tgz#25d080698abe3b04aafd106f6058ce00f8af017e"
-  integrity sha512-1/pjEn0n7XpuHVUmrP3LCFJ5QyMM/8+Q+xiLVT8ajWkyPHmSdONVwL5RG//R+rcyySr2dlzFBEtL6nryMy7CoA==
+"@exma/parser@0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@exma/parser/-/parser-0.0.11.tgz#5e421a4126a6595d04c4c802bd914d2db3655ab5"
+  integrity sha512-LT7oodOzcsOy3CPAt9mCjASSTF7E7TwY1e8NCnHEOVmlliSOE1sdTQmN/eue9bbdAB/eLE13FjCsciUNSAGCOA==
 
 "@inceptjs/types@0.0.29":
   version "0.0.29"
@@ -312,13 +312,21 @@ escalade@^3.1.1:
   resolved "https://registry.yarnpkg.com/escalade/-/escalade-3.1.1.tgz#d8cfdc7000965c5a0174b4a82eaa5c0552742e40"
   integrity sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==
 
-exma@0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/exma/-/exma-0.0.4.tgz#bf17688ca9bf243ceba475c31ad53fdf4e93d882"
-  integrity sha512-aaSba/bdoJTqZxCLTyTHqQv5hgrlR4QBFy74DO/tq+/IDpJ47p54ouixPchgOm3acutf1B4Rm6z6Dji1pemKEw==
+exma-typescript@0.0.11:
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/exma-typescript/-/exma-typescript-0.0.11.tgz#baf6a96608100c106b8c659c572c87d513f5d04b"
+  integrity sha512-Af1Rr/IgPBMsv5HZHTgLn6iBM4hotO9arP5+9j4dR9uF0FSWfx7YfVDkNMOkxxsf5Ikk7I50C6d66E+aw19e8A==
   dependencies:
-    "@exma/generator" "0.0.4"
-    "@exma/parser" "0.0.4"
+    exma "0.0.11"
+    ts-morph "18.0.0"
+
+exma@0.0.11:
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/exma/-/exma-0.0.11.tgz#84229ea7422d8df865ae33dc16a2a83cb9c768cc"
+  integrity sha512-jYmkEF07GBldOy5/gMEz9pI/dH5QN+zFEpGDDonU2HnO9CxDH/orn6UGY6Nf+nOdQsPqsWuyCEbEDmUPF8fTpQ==
+  dependencies:
+    "@exma/generator" "0.0.11"
+    "@exma/parser" "0.0.11"
 
 fast-glob@^3.2.12:
   version "3.3.0"
@@ -506,7 +514,15 @@ queue-microtask@^1.2.2:
   resolved "https://registry.yarnpkg.com/queue-microtask/-/queue-microtask-1.2.3.tgz#4929228bbc724dfac43e0efb058caf7b6cfb6243"
   integrity sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==
 
-react-dom@18.2.0:
+r22n@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/r22n/-/r22n-1.0.2.tgz#edac979c55b1a5880bd1319c19f2658386b5e755"
+  integrity sha512-7wdZ3wlYSrCTL1G6+2ugv+EWscUv9IyfQiXzAqHA8v6GwwoO/rEuBgiQmeVMw154pJE/0DX+WDoT0Rfpamzsfg==
+  dependencies:
+    react "18.2.0"
+    react-dom "18.2.0"
+
+react-dom@18.2.0, react-dom@^18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.2.0.tgz#22aaf38708db2674ed9ada224ca4aa708d821e3d"
   integrity sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==
@@ -514,7 +530,7 @@ react-dom@18.2.0:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
 
-react@18.2.0:
+react@18.2.0, react@^18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react/-/react-18.2.0.tgz#555bd98592883255fa00de14f1151a917b5d77d5"
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==

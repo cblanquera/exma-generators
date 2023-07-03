@@ -5,8 +5,8 @@
     "examples/*"
   ],
   "scripts": {
-    "build": "npm run build:react",
-    "build:react": "cd packages/exma-react && npm run build"
+    "build": "npm run build:frui",
+    "build:frui": "cd packages/exma-frui && npm run build"
   },
   "devDependencies": {
     "concurrently": "7.6.0"

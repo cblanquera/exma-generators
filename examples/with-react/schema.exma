@@ -1,48 +1,166 @@
-generator "./dist/make-sql" {
-  provider "custom-client-js"
-  previewFeatures ["fullTextSearch"]
+generator "exma-typescript" {
+  ts true
+  output "./types.ts"
 }
 
-prop Text { type "text" }
-prop Uppercase { format "uppercase" }
-prop Pretty { format "pretty" }
-prop Shirts { sizes ["xl" "sm" "md"] }
-prop Age { min 0 max 110 }
-prop Price { min 0 }
-
-prop Countries {
-  options [
-    { label "United States" value "US" }
-    { label "Mexico" value "MX" }
-    { label "Canada" value "CA" }
-  ]
+generator "exma-frui" {
+  ui "tailwind"
+  ts true
+  output "./react"
+  types "./types.ts"
 }
 
 enum Roles {
-  ADMIN "Admin"
-  MANAGER "Manager"
-  USER "User"
+  ADMIN   "ADMIN"
+  MANAGER "MANAGER"
+  USER    "USER"
 }
 
-type Address @label("Address" "Addresses") {
-  street  String    @field.input(Text) @is.required @list.hide
-  city    String?   @field.input(Text) @is.required
-  country String    @field.select(Countries) @is.option(Countries) @list.text(Uppercase) @view.text(Uppercase)
-  postal  String    @field.input(Text) @is.required
+enum Status {
+  PENDING "Pending"
+  OPEN    "Open"
+  CLOSE   "Close"
 }
 
-model User @label("User" "Users") {
-  id       String       @label("ID")         @id @default("nanoid(20)")
-  username String       @label("Username")   @searchable @field.input(Text) @is.required
-  password String       @label("Password")   @field.password @is.clt(80) @is.cgt(8) @is.required @list.hide @view.hide
-  role     Roles        @label("Role")       @filterable @field.select @list.text(Uppercase) @view.text(Uppercase)
-  address  Address?     @label("Address")    @list.hide
-  age      Number       @label("Age")        @unsigned @filterable @sortable @field.number(Age) @is.gt(0) @is.lt(150)
-  salary   Number       @label("Salary")     @insigned @filterable @sortable @field.number(Price) @list.number @view.number
-  balance  Number[]     @label("Balance")    @filterable @sortable @field.number() @list.number() @view.number
-  bio      Text         @label("Bio")        @field.markdown
-  active   Boolean      @label("Active")     @default(true) @filterable @field.switch @list.yesno @view.yesno
-  created  Date         @label("Created")    @default("now()") @filterable @sortable @list.date(Pretty)
-  updated  Date         @label("Updated")    @default("updated()") @filterable @sortable @list.date(Pretty)
-  company  Company?     @label("My Company") 
+prop RoleProps {
+  options [
+    { label "Admin" value "ADMIN" }
+    { label "Manager" value "MANAGER" }
+    { label "User" value "USER" }
+  ]
+}
+
+prop StatusProps {
+  options [
+    { label "Pending" value "PENDING" }
+    { label "Open" value "OPEN" }
+    { label "Close" value "CLOSE" }
+  ]
+}
+
+prop PriceProps {
+  min "0"
+}
+
+prop ItemsProps {
+  type "number"
+  min "1"
+  step "1"
+}
+
+type Item {
+  name     String
+  currency String
+  unit     Float
+  quantity Integer 
+}
+
+type Line {
+  name     String
+  currency String
+  price    Float
+}
+
+model User {
+  id        String   @label("ID")         
+                     @db.char(21) @id @default("cuid()")
+
+  username  String   @label("Username")   
+                     @db.varchar(255) @unique @searchable             
+                     @field.text
+
+  companyId String?  @label("Company")    
+                     @db.char(21) @relation("Company" "id" "name")    
+                     @field.modelcomplete("Company" "id" "name") 
+
+  name      String   @label("Name")       
+                     @db.varchar(255) @searchable                     
+                     @field.text
+
+  role      Roles    @label("Role")    
+                     //DB related   
+                     @db.varchar(255) @default("USER") @filterable 
+                     //Validations 
+                     @is.option(["ADMIN" "MANAGER" "USER"] "Should be a valid option") 
+                     //Formats 
+                     @field.select(RoleProps) @list.lowercase @view.lowercase 
+
+  active    Boolean  @label("Active")     
+                     @default(true) @filterable
+                     @field.switch @list.yesno @view.yesno
+
+  lastLogin Datetime @label("Last Login") 
+                     @default("now()")
+                     @list.date
+
+  created   Datetime @label("Created")
+                     @default("now()") @filterable @sortable
+                     @list.date
+
+  updated   Datetime @label("Updated")
+                     @default("now()") @updated @filterable @sortable 
+                     @list.date
+}
+
+model Company {
+  id         String   @label("ID")         @db.char(21) @id @default("cuid()")
+  name       String   @label("Name")       @db.varchar(255) @unique @searchable             @field.text
+  country    String   @label("Country")    @db.char(2) @filterable                          @field.country
+  address    String?  @label("Address")    @db.varchar(255)                                 @field.text @list.hide
+  contact    String?  @label("Contact")    @db.varchar(255)                                 @field.text
+  email      String?  @label("Email")      @db.varchar(255)                                 @field.email @list.email @view.email      @is.email("Should be an email")
+  phone      String?  @label("Phone")      @db.varchar(255)                                 @field.phone @list.phone @view.phone
+  files      String[] @label("Files")                                                       @field.filelist @list.hide @view.line
+  references Hash?    @label("References")                                                  @field.metadata @list.hide @view.metadata
+  supplier   Boolean  @label("Supplier")   @default(false)                                  @field.switch @list.yesno @view.yesno
+  approved   Boolean  @label("Approved")   @default(false)                                  @field.switch @list.yesno @view.yesno
+  active     Boolean  @label("Active")     @default(true) @filterable                       @field.switch @list.yesno @view.yesno
+  created    Datetime @label("Created")    @default("now()") @filterable @sortable          @list.date
+  updated    Datetime @label("Updated")    @default("now()") @updated @filterable @sortable @list.date
+}
+
+model Term {
+  name String @label("Name") @id @db.varchar(255)
+  type String @label("Type") @db.varchar(255)
+}
+
+model Request {
+  id          String    @label("ID")          @db.char(21) @id @default("cuid()")
+  companyId   String    @label("Company")     @db.char(21) @relation("Company" "id" "name")               @field.modelcomplete("Company" "id" "name") 
+  address     String?   @label("Address")     @db.varchar(255)                                            @field.text @list.hide
+  contact     String?   @label("Contact")     @db.varchar(255)                                            @field.text
+  email       String?   @label("Email")       @db.varchar(255)                                            @field.text @list.email @view.phone                        @is.email("Should be an email")
+  phone       String?   @label("Phone")       @db.varchar(255)                                            @field.text @list.email @view.phone
+  description String?   @label("Description") @db.text @searchable                                        @field.textarea @list.hide
+  memo        String?   @label("Memo")        @db.text @searchable                                        @field.textarea @list.hide
+  currency    String    @label("Currency")    @db.char(3) @filterable                                     @field.currency
+  budget      Float     @label("Budget")      @db.float(10 2) @default(0) @unsigned @filterable @sortable @field.price(PriceProps) @list.price @view.price           @is.number @is.gt(0 "Should be more than zero")
+  starts      Datetime  @label("Starts")      @default("now()") @sortable                                 @field.datetime @list.date @view.date
+  expires     Datetime  @label("Expires")     @default("+30 days") @sortable                              @field.datetime @list.date @view.date                      @is.future("Should be in the future")
+  sla         Datetime? @label("SLA")         @sortable                                                   @field.datetime @list.date @view.date                      @is.future("Should be in the future")
+  items       Item[]    @label("Items")                                                                   @field.fieldset("Item" true) @list.hide @view.table 
+  lines       Line[]    @label("Lines")                                                                   @field.fieldset("Line" true) @list.hide @view.table
+  terms       String[]  @label("Terms")                                                                   @field.textlist @list.hide @view.line
+  files       Hash      @label("Files")                                                                   @field.filelsit @list.hide @view.line
+  status      Status    @label("Status")      @default("OPEN") @filterable                                @field.select(StatusProps) @list.lowercase @view.lowercase
+  active      Boolean   @label("Active")      @default(true) @filterable                                  @field.switch @list.yesno @view.yesno
+  created     Datetime  @label("Created")     @default("now()") @filterable @sortable                     @list.date
+  updated     Datetime  @label("Updated")     @default("now()") @updated @filterable @sortable            @list.date
+}
+
+model Quote {
+  id          String    @label("ID")      @db.char(21) @id @default("cuid()")
+  companyId   String    @label("Company") @db.char(21) @relation("Company" "id" "name")               @field.modelcomplete("Company" "id" "name") 
+  requestId   String    @label("Request") @db.char(21) @relation("Request" "id" "description")        @field.modelcomplete("Request" "id" "description") 
+  memo        String?   @label("Memo")    @db.text @searchable                                        @field.textarea @list.hide
+  price       Float     @label("Price")   @db.float(10 2) @default(0) @unsigned @filterable @sortable @field.price(PriceProps) @list.price @view.price
+  items       Integer   @label("Items")   @db.int(10) @default(0) @unsigned @filterable @sortable     @field.text(ItemsProps)
+  lines       Line[]    @label("Lines")                                                               @field.fieldset("Line" true) @list.hide @view.table
+  expires     Datetime? @label("Expires") @default("+30 days") @sortable                              @field.datetime @list.date @view.date
+  sla         String?   @label("SLA")                                                                 @field.text
+  terms       String[]  @label("Terms")                                                               @field.textlist @list.hide @view.line
+  files       Hash      @label("Files")                                                               @field.filelsit @list.hide @view.line
+  active      Boolean   @label("Active")  @default(true) @filterable                                  @field.switch @list.yesno @view.yesno
+  created     Datetime  @label("Created") @default("now()") @filterable @sortable                     @list.date
+  updated     Datetime  @label("Updated") @default("now()") @updated @filterable @sortable            @list.date
 }
