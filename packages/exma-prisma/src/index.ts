@@ -1,4 +1,4 @@
-import type { GeneratorProps } from 'exma';
+import type { PluginProps } from 'exma';
 
 import fs from 'fs';
 import { Loader } from 'exma';
@@ -7,7 +7,7 @@ import Type from './types/Type';
 import Model from './types/Model';
 import Transformer from './types/Transformer';
 
-export default function generate({ config, schema, cli }: GeneratorProps) {
+export default function generate({ config, schema, cli }: PluginProps) {
   if (!config.output) {
     return cli.terminal.error('No output directory specified');
   }

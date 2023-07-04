@@ -17,7 +17,7 @@ npm i --dev exma-frui
 In your `schema.exma` file add the following generator.
 
 ```js
-generator "exma-frui" {
+plugin "exma-frui" {
   ui "tailwind"
   ts true
   output "./react"

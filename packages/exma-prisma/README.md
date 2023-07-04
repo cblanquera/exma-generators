@@ -17,7 +17,7 @@ npm i --dev exma-prisma
 In your `schema.exma` file add the following generator.
 
 ```js
-generator "exma-prisma" {
+plugin "exma-prisma" {
   generator { client { provider "prisma-client-js" } }
   db { provider "cockroachdb" url ["DATABASE_URL"] }
   output "./prisma.schema"

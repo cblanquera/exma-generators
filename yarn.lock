@@ -16,17 +16,17 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
-"@exma/generator@0.0.12":
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/@exma/generator/-/generator-0.0.12.tgz#57296dbc8f62981d79978c46272b8f81c2019973"
-  integrity sha512-gvUfqkWJlI7i3btN3I/2MmwxT8LYk5MhXojLuQWQt6GOZV7YGk7HiEadAJM3MDYjhpu2J7TTdluFsbA03C17zQ==
+"@exma/generator@0.0.14":
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/@exma/generator/-/generator-0.0.14.tgz#15c5944ae334295d4e1c93930f2da00cf8d5d012"
+  integrity sha512-s8xAiksoOLJi5c1Pc+0vOWH7PiQJUdUaGzem1uAeL8VUpCNp818nJ4StH+w597wyDzbHbpe1leS6nRE6pRvguA==
   dependencies:
-    "@exma/parser" "0.0.12"
+    "@exma/parser" "0.0.14"
 
-"@exma/parser@0.0.12":
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/@exma/parser/-/parser-0.0.12.tgz#21bd51a3ccee6a864ec28b142ee2b6eafc7c9d7a"
-  integrity sha512-TgGf/GYI4+kmkwGY05uW3kLge+IlM92myKnH7yaMLJeVD1X0l+wCvfWayRP+yeiDGH1GjdBc35rtK5uF1D0KJw==
+"@exma/parser@0.0.14":
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/@exma/parser/-/parser-0.0.14.tgz#a16ccaf3871e25d8feaae05cc38e94cec1119ab1"
+  integrity sha512-s3eDBhp9Iai0bLvcvEsIMIVQo0ExgD2cwIloUiB4/sTSO/KI1HCZI6EKVraq+91Zs8ZJFCCtwlftHxJLUAn/Xw==
 
 "@inceptjs/types@0.0.29":
   version "0.0.29"
@@ -312,21 +312,21 @@ escalade@^3.1.1:
   resolved "https://registry.yarnpkg.com/escalade/-/escalade-3.1.1.tgz#d8cfdc7000965c5a0174b4a82eaa5c0552742e40"
   integrity sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==
 
-exma-typescript@0.0.12:
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/exma-typescript/-/exma-typescript-0.0.12.tgz#81b6732090b229d5d0dc63854a59bac0bfc93ddc"
-  integrity sha512-UAm3/PTQMT0bHngigespUpCHXzvU7u4twxqGXgL8PwbMaDubTBCxJRssSqV1ArENre0cudCKT5KsZVZbF8tmsA==
+exma-typescript@0.0.14:
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/exma-typescript/-/exma-typescript-0.0.14.tgz#77c4dd36ebccd71dc799d2c814e6f03faa2079f8"
+  integrity sha512-pW1xaos/cnvKGEXAYrVthXLxmAv60qQX6D5YnJr05OqNVnZGjoT5gbMg9upgoWIOblgXELj0a5eVIKo1teUuog==
   dependencies:
-    exma "0.0.12"
+    exma "0.0.14"
     ts-morph "18.0.0"
 
-exma@0.0.12:
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/exma/-/exma-0.0.12.tgz#e7325e21118ca526e8ab7824dcbb03f289c6211b"
-  integrity sha512-25zZSy6zpZS6t0cfwWRGK9w3YQ4jvcT+OnNrHb34tLpVGnU78Y+6VQjmMj24mNltXW7K314byDJEWX5Yb1oR2g==
+exma@0.0.14:
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/exma/-/exma-0.0.14.tgz#82ff450d68ad78a07b7235bdb721643826a7e35b"
+  integrity sha512-feYsBIzZaJJIKgLhF+XgImwGAUCAiQX0xvEFhGVnR9zIabmMqfzZ2xNJy7O0y+8Qw2Y+7FSOg+E8pbCx0jS6DQ==
   dependencies:
-    "@exma/generator" "0.0.12"
-    "@exma/parser" "0.0.12"
+    "@exma/generator" "0.0.14"
+    "@exma/parser" "0.0.14"
 
 fast-glob@^3.2.12:
   version "3.3.0"

@@ -1,16 +1,16 @@
-generator "exma-typescript" {
+plugin "exma-typescript" {
   ts true
   output "./types.ts"
 }
 
-generator "exma-frui" {
+plugin "exma-frui" {
   ui "tailwind"
   ts true
   output "./react"
   types "./types.ts"
 }
 
-generator "exma-prisma" {
+plugin "exma-prisma" {
   generator { client { provider "prisma-client-js" } }
   db { provider "cockroachdb" url ["DATABASE_URL"] }
   output "./schema.prisma"

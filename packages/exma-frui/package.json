@@ -1,6 +1,6 @@
 {
   "name": "exma-frui",
-  "version": "0.0.12",
+  "version": "0.0.14",
   "license": "MIT",
   "description": "Parses an exma schema to FREE react UI.",
   "author": "Chris <chris@incept.asia>",
@@ -22,7 +22,7 @@
   ],
   "dependencies": {
     "@inceptjs/types": "0.0.29",
-    "exma": "0.0.12",
+    "exma": "0.0.14",
     "ts-morph": "18.0.0"
   },
   "peerDependencies": {

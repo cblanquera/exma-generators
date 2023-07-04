@@ -1,4 +1,4 @@
-import type { GeneratorProps } from 'exma';
+import type { PluginProps } from 'exma';
 
 import path from 'path';
 import { Project, IndentationText } from 'ts-morph';
@@ -36,7 +36,7 @@ import generateFormFields from './generators/models/components/FormFields';
 import generateListFormats from './generators/models/components/ListFormats';
 import generateViewFormats from './generators/models/components/ViewFormats';
 
-export default function generate({ config, schema, cli }: GeneratorProps) {
+export default function generate({ config, schema, cli }: PluginProps) {
   if (!config.output) {
     return cli.terminal.error('No output directory specified');
   }
