@@ -12,6 +12,8 @@ import Model from './types/Model';
 //client generators
 import generateClientIndex from './generators/index';
 import generateValidator from './generators/Validator';
+import generateException from './generators/Exception';
+import generateStore from './generators/Store';
 import generateHookUseFetch from './generators/hooks/useFetch';
 import generateHookUseFilters from './generators/hooks/useFilters';
 import generateHookUseForm from './generators/hooks/useForm';
@@ -106,6 +108,8 @@ export default function generate({ config, schema, cli }: PluginProps) {
   const directory = project.createDirectory(root);
   generateClientIndex(directory, schema);
   generateValidator(directory);
+  generateException(directory);
+  generateStore(directory);
   generateHookUseFetch(directory);
   generateHookUseFilters(directory);
   generateHookUseForm(directory);
