@@ -773,5 +773,5 @@ function shouldBeAnArray(object: Record<string, any>): boolean {
 }`;
 
 export default function generate(project: Location) {
-  project.createSourceFile(`Validator.ts`, codes, { overwrite: true });
+  project.createSourceFile(`Store.ts`, codes, { overwrite: true });
 };

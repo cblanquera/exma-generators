@@ -1,6 +1,6 @@
 {
   "name": "exma-prisma",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "license": "MIT",
   "description": "Parses an exma schema to a prisma schema.",
   "author": "Chris <chris@incept.asia>",
