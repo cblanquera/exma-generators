@@ -130,6 +130,4 @@ dist
 .pnp.*
 
 # custom
-examples/with-node/react
-examples/with-node/types.ts
-examples/with-node/schema.prisma
+examples/with-node/shared
