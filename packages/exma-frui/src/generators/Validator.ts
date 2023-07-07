@@ -124,5 +124,5 @@ const code = `export default class Validator {
 };`
 
 export default function generate(project: Location) {
-  project.createSourceFile(`types/Validator.ts`, code, { overwrite: true });
+  project.createSourceFile(`Validator.ts`, code, { overwrite: true });
 };

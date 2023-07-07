@@ -8,7 +8,7 @@ type Location = Project|Directory;
 
 export default function generate(project: Location, name: string) {
   const model = new Model(name);
-  const typeName = capitalize(model.name);
+  const typeName = capitalize(camelfy(model.name));
   const extendedName = model.relations.length ? `${typeName}Extended` : typeName;
   const columns = model.filterables.filter(
     column => column.field.config.component

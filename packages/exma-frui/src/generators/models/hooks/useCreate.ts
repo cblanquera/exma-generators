@@ -2,13 +2,13 @@
 import type { Project, Directory } from 'ts-morph';
 //helpers
 import Model from '../../../types/Model';
-import { capitalize } from '../../../utils';
+import { capitalize, camelfy } from '../../../utils';
 
 type Location = Project|Directory;
 
 export default function generate(project: Location, name: string) {
   const model = new Model(name);
-  const typeName = capitalize(model.name);
+  const typeName = capitalize(camelfy(model.name));
   const path = `models/${model.name.toLowerCase()}/hooks/useCreate.ts`;
   const source = project.createSourceFile(path, '', { overwrite: true });
   //import type { FormEvent } from 'react';

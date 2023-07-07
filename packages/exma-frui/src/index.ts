@@ -11,30 +11,41 @@ import Model from './types/Model';
 
 //client generators
 import generateClientIndex from './generators/index';
-import generateTypeValidator from './generators/types/Validator';
+import generateValidator from './generators/Validator';
 import generateHookUseFetch from './generators/hooks/useFetch';
 import generateHookUseFilters from './generators/hooks/useFilters';
 import generateHookUseForm from './generators/hooks/useForm';
 import generateHookUseStripe from './generators/hooks/useStripe';
-import generateClientValidate from './generators/models/validate';
-import generateClientTypes from './generators/models/types';
-import generateUseCreate from './generators/models/hooks/useCreate';
-import generateUseRemove from './generators/models/hooks/useRemove';
-import generateUseUpdate from './generators/models/hooks/useUpdate';
-import generateUseSearch from './generators/models/hooks/useSearch';
-import generateUseDetail from './generators/models/hooks/useDetail';
-import generateReactDefaultFilters from './generators/models/components/react/DefaultFilters';
-import generateReactDefaultForm from './generators/models/components/react/DefaultForm';
-import generatereactDefaultTable from './generators/models/components/react/DefaultTable';
-import generateReactDefaultView from './generators/models/components/react/DefaultView';
-import generateTailwindDefaultFilters from './generators/models/components/tailwind/DefaultFilters';
-import generateTailwindDefaultForm from './generators/models/components/tailwind/DefaultForm';
-import generateTailwindDefaultTable from './generators/models/components/tailwind/DefaultTable';
-import generateTailwindDefaultView from './generators/models/components/tailwind/DefaultView';
-import generateFilterFields from './generators/models/components/FilterFields';
-import generateFormFields from './generators/models/components/FormFields';
-import generateListFormats from './generators/models/components/ListFormats';
-import generateViewFormats from './generators/models/components/ViewFormats';
+import generateModelValidate from './generators/models/validate';
+import generateModelTypes from './generators/models/types';
+import generateModelUseCreate from './generators/models/hooks/useCreate';
+import generateModelUseRemove from './generators/models/hooks/useRemove';
+import generateModelUseUpdate from './generators/models/hooks/useUpdate';
+import generateModelUseSearch from './generators/models/hooks/useSearch';
+import generateModelUseDetail from './generators/models/hooks/useDetail';
+import generateModelReactDefaultFilters from './generators/models/components/react/DefaultFilters';
+import generateModelReactDefaultForm from './generators/models/components/react/DefaultForm';
+import generateModelReactDefaultTable from './generators/models/components/react/DefaultTable';
+import generateModelReactDefaultView from './generators/models/components/react/DefaultView';
+import generateModelTailwindDefaultFilters from './generators/models/components/tailwind/DefaultFilters';
+import generateModelTailwindDefaultForm from './generators/models/components/tailwind/DefaultForm';
+import generateModelTailwindDefaultTable from './generators/models/components/tailwind/DefaultTable';
+import generateModelTailwindDefaultView from './generators/models/components/tailwind/DefaultView';
+import generateModelFilterFields from './generators/models/components/FilterFields';
+import generateModelFormFields from './generators/models/components/FormFields';
+import generateModelListFormats from './generators/models/components/ListFormats';
+import generateModelViewFormats from './generators/models/components/ViewFormats';
+
+import generateTypeFormFields from './generators/types/components/FormFields';
+import generateTypeListFormats from './generators/types/components/ListFormats';
+import generateTypeViewFormats from './generators/types/components/ViewFormats';
+import generateTypeReactFieldset from './generators/types/components/react/Fieldset';
+import generateTypeReactFieldsets from './generators/types/components/react/Fieldsets';
+import generateTypeTailwindFieldset from './generators/types/components/tailwind/Fieldset';
+import generateTypeTailwindFieldsets from './generators/types/components/tailwind/Fieldsets';
+import generateTypeHooksUseFieldset from './generators/types/hooks/useFieldset';
+import generateTypeHooksUseFieldsets from './generators/types/hooks/useFieldsets';
+import generateTypeTypes from './generators/types/types';
 
 export default function generate({ config, schema, cli }: PluginProps) {
   if (!config.output) {
@@ -94,36 +105,52 @@ export default function generate({ config, schema, cli }: PluginProps) {
 
   const directory = project.createDirectory(root);
   generateClientIndex(directory, schema);
-  generateTypeValidator(directory);
+  generateValidator(directory);
   generateHookUseFetch(directory);
   generateHookUseFilters(directory);
   generateHookUseForm(directory);
   generateHookUseStripe(directory);
   for (const model in schema.model) {
-    generateClientTypes(directory, typePath, model);
-    generateClientValidate(directory, model);
+    generateModelTypes(directory, typePath, model);
+    generateModelValidate(directory, model);
 
-    generateUseCreate(directory, model);
-    generateUseRemove(directory, model);
-    generateUseUpdate(directory, model);
-    generateUseSearch(directory, model);
-    generateUseDetail(directory, model);
+    generateModelUseCreate(directory, model);
+    generateModelUseRemove(directory, model);
+    generateModelUseUpdate(directory, model);
+    generateModelUseSearch(directory, model);
+    generateModelUseDetail(directory, model);
 
-    generateFilterFields(directory, model, ui);
-    generateFormFields(directory, model, ui);
-    generateListFormats(directory, model, ui);
-    generateViewFormats(directory, model, ui);
+    generateModelFilterFields(directory, model, ui);
+    generateModelFormFields(directory, model, ui);
+    generateModelListFormats(directory, model, ui);
+    generateModelViewFormats(directory, model, ui);
 
     if (ui === 'tailwind') {
-      generateTailwindDefaultFilters(directory, model);
-      generateTailwindDefaultForm(directory, model);
-      generateTailwindDefaultTable(directory, model);
-      generateTailwindDefaultView(directory, model);
+      generateModelTailwindDefaultFilters(directory, model);
+      generateModelTailwindDefaultForm(directory, model);
+      generateModelTailwindDefaultTable(directory, model);
+      generateModelTailwindDefaultView(directory, model);
     } else {
-      generateReactDefaultFilters(directory, model);
-      generateReactDefaultForm(directory, model);
-      generatereactDefaultTable(directory, model);
-      generateReactDefaultView(directory, model);
+      generateModelReactDefaultFilters(directory, model);
+      generateModelReactDefaultForm(directory, model);
+      generateModelReactDefaultTable(directory, model);
+      generateModelReactDefaultView(directory, model);
+    }
+  }
+
+  for (const type in schema.type) {
+    generateTypeTypes(directory, typePath, type);
+    generateTypeFormFields(directory, type, ui);
+    generateTypeListFormats(directory, type, ui);
+    generateTypeViewFormats(directory, type, ui);
+    generateTypeHooksUseFieldset(directory, type);
+    generateTypeHooksUseFieldsets(directory, type);
+    if (ui === 'tailwind') {
+      generateTypeTailwindFieldset(directory, type);
+      generateTypeTailwindFieldsets(directory, type);
+    } else {
+      generateTypeReactFieldset(directory, type);
+      generateTypeReactFieldsets(directory, type);
     }
   }
 

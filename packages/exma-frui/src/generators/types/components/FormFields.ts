@@ -1,7 +1,6 @@
 //types
 import type { Project, Directory } from 'ts-morph';
 //helpers
-import Model from '../../../types/Model';
 import Type from '../../../types/Type';
 import { VariableDeclarationKind } from 'ts-morph';
 import { capitalize, camelfy } from '../../../utils';
@@ -9,12 +8,12 @@ import { capitalize, camelfy } from '../../../utils';
 type Location = Project|Directory;
 
 export default function generateViewFormats(project: Location, name: string, ui = 'react') {
-  const model = new Model(name);
-  const columns = model.columns.filter(
+  const type = new Type(name);
+  const columns = type.columns.filter(
     column => column.field.config.component
   );
   
-  const path = `models/${model.name.toLowerCase()}/components/FormFields.tsx`;
+  const path = `types/${type.name.toLowerCase()}/components/FormFields.tsx`;
   const source = project.createSourceFile(path, '', { overwrite: true });
   
   if (columns.length) {
@@ -23,23 +22,10 @@ export default function generateViewFormats(project: Location, name: string, ui 
       isTypeOnly: true,
       moduleSpecifier: 'frui',
       namedImports: columns
-      .filter(column => column.field.method !== 'fieldset')
       .map(column => `${column.field.config.component}Props`)
       .filter((value, index, array) => array.indexOf(value) === index)
     });
   }
-  columns
-    .filter(column => column.field.method === 'fieldset')
-    .forEach(column => {
-      const type = Type.get(column.type);
-      if (!type) return;
-      //import type { Line } from '../../../types/line/types';
-      source.addImportDeclaration({
-        isTypeOnly: true,
-        moduleSpecifier: `../../../types/${type.name.toLowerCase()}/types`,
-        namedImports: [type.name]
-      }); 
-    });
   //import React from 'react';
   source.addImportDeclaration({
     defaultImport: 'React',
@@ -51,7 +37,6 @@ export default function generateViewFormats(project: Location, name: string, ui 
     moduleSpecifier: `frui/${ui}/Control`
   });
   columns
-    .filter(column => column.field.method !== 'fieldset')
     .map(column => column.field.config.component)
     .filter((value, index, array) => array.indexOf(value) === index)
     .forEach(defaultImport => {
@@ -60,26 +45,6 @@ export default function generateViewFormats(project: Location, name: string, ui 
         source.addImportDeclaration({ 
           defaultImport, 
           moduleSpecifier: `frui/${ui}/${defaultImport}` 
-        });
-      }
-    });
-  
-  columns
-    .filter(column => column.field.method === 'fieldset')
-    .forEach(column => {
-      const type = Type.get(column.type);
-      if (!type) return;
-      if (column.multiple) {
-        //import ItemFieldsets from '../../../types/item/components/Fieldsets';
-        source.addImportDeclaration({ 
-          defaultImport: `${capitalize(camelfy(type.name))}Fieldsets`, 
-          moduleSpecifier: `../../../types/${type.name.toLowerCase()}/components/Fieldsets` 
-        });
-      } else {
-        //import ItemFieldset from '../../../types/item/components/Fieldset';
-        source.addImportDeclaration({ 
-          defaultImport: `${capitalize(camelfy(type.name))}Fieldset`, 
-          moduleSpecifier: `../../../types/${type.name.toLowerCase()}/components/Fieldset` 
         });
       }
     });
@@ -94,7 +59,7 @@ export default function generateViewFormats(project: Location, name: string, ui 
     }`)
   });
   //export NameField: (props: FormComponentProps) => React.ReactElement
-  columns.filter(column => column.field.method !== 'fieldset').forEach((column) => {
+  columns.forEach((column) => {
     source.addFunction({
       isExported: true,
       name: `${capitalize(camelfy(column.name))}Field`,
@@ -113,40 +78,6 @@ export default function generateViewFormats(project: Location, name: string, ui 
         return (
           <Control label={label} error={error}>
             <${column.field.config.component} {...attributes} />
-          </Control>
-        );
-      `)
-    });
-  });
-
-  //export NameField: (props: FormComponentProps) => React.ReactElement
-  columns.filter(column => column.field.method === 'fieldset').forEach((column) => {
-    const type = Type.get(column.type);
-    if (!type) return;
-    const component = column.multiple 
-      ? `${capitalize(camelfy(type.name))}Fieldsets` 
-      : `${capitalize(camelfy(type.name))}Fieldset`;
-    const valueType = column.multiple 
-      ? `${capitalize(camelfy(type.name))}[]`
-      : `${capitalize(camelfy(type.name))}`;
-    source.addFunction({
-      isExported: true,
-      name: `${capitalize(camelfy(column.name))}Field`,
-      parameters: [
-        { name: 'props', type: 'FormComponentProps' }
-      ],
-      returnType: 'React.ReactElement',
-      statements: (`
-        const { label, error, change, ...fieldProps } = props;
-        const attributes: Record<string, any> = Object.assign(
-          ${JSON.stringify(column.field.attributes || {}, null, 2)},
-          fieldProps || {}
-        );
-        attributes.error = Boolean(error);
-        attributes.onUpdate = (value: ${valueType}) => change('${column.name}', value);
-        return (
-          <Control label={label} error={error}>
-            <${component} {...attributes} />
           </Control>
         );
       `)

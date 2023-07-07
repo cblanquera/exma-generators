@@ -9,7 +9,7 @@ type Paths = null|true|string|number|(string|number)[];
 //hooks
 import { useState } from 'react';
 //helpers
-import { Store } from '@blanquera/incept';
+import Store from '../Store';
 
 export type FormChangeHandler = (
   paths: null|true|string|number|(string|number)[], 
