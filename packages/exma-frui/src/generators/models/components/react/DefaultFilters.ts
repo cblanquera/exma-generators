@@ -2,7 +2,7 @@
 import type { Project, Directory } from 'ts-morph';
 //helpers
 import Model from '../../../../types/Model';
-import { capitalize, camelfy } from '../../../../utils';
+import { capitalize, camelfy, formatCode } from '../../../../utils';
 
 type Location = Project|Directory;
 
@@ -45,15 +45,15 @@ export default function generate(project: Location, name: string) {
     moduleSpecifier: 'r22n',
     namedImports: [ 'useLanguage' ]
   });
-  //import Loader from 'frui/react/Loader';
+  //import Loader from 'frui-react/Loader';
   source.addImportDeclaration({
     defaultImport: 'Loader',
-    moduleSpecifier: 'frui/react/Loader'
+    moduleSpecifier: 'frui-react/Loader'
   });
   //import Button from 'frui/react/Button';
   source.addImportDeclaration({
     defaultImport: 'Button',
-    moduleSpecifier: 'frui/react/Button'
+    moduleSpecifier: 'frui-react/Button'
   });
   if (columns.length) {
     //import { RoleFilter, ActiveFilter, ... } from './FilterFields';
@@ -83,7 +83,7 @@ export default function generate(project: Location, name: string) {
       { name: 'props', type: 'DefaultFiltersProps' }
     ],
     returnType: 'React.ReactElement',
-    statements: (`
+    statements: formatCode(`
       const { handlers, data, response, status } = props;
       const { _ } = useLanguage();
       return (

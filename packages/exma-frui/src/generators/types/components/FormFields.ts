@@ -3,7 +3,7 @@ import type { Project, Directory } from 'ts-morph';
 //helpers
 import Type from '../../../types/Type';
 import { VariableDeclarationKind } from 'ts-morph';
-import { capitalize, camelfy } from '../../../utils';
+import { capitalize, camelfy, formatCode } from '../../../utils';
 
 type Location = Project|Directory;
 
@@ -17,10 +17,10 @@ export default function generateViewFormats(project: Location, name: string, ui 
   const source = project.createSourceFile(path, '', { overwrite: true });
   
   if (columns.length) {
-    //import type { FieldSelectProps, FieldInputProps } from 'frui'
+    //import type { SelectProps, InputProps } from 'frui-tailwind/fields'
     source.addImportDeclaration({
       isTypeOnly: true,
-      moduleSpecifier: 'frui',
+      moduleSpecifier: `frui-${ui}/fields`,
       namedImports: columns
       .map(column => `${column.field.config.component}Props`)
       .filter((value, index, array) => array.indexOf(value) === index)
@@ -31,20 +31,20 @@ export default function generateViewFormats(project: Location, name: string, ui 
     defaultImport: 'React',
     moduleSpecifier: 'react'
   });
-  //import Control from 'frui/tailwind/Control';
+  //import Control from 'frui-tailwind/Control';
   source.addImportDeclaration({
     defaultImport: 'Control',
-    moduleSpecifier: `frui/${ui}/Control`
+    moduleSpecifier: `frui-${ui}/Control`
   });
   columns
     .map(column => column.field.config.component)
     .filter((value, index, array) => array.indexOf(value) === index)
     .forEach(defaultImport => {
       if (defaultImport) {
-        //import FieldInput from 'frui/tailwind/FieldInput';
+        //import FieldInput from 'frui-tailwind/fields/Input';
         source.addImportDeclaration({ 
           defaultImport, 
-          moduleSpecifier: `frui/${ui}/${defaultImport}` 
+          moduleSpecifier: `frui-${ui}/fields/${defaultImport}` 
         });
       }
     });
@@ -67,7 +67,7 @@ export default function generateViewFormats(project: Location, name: string, ui 
         { name: 'props', type: 'FormComponentProps' }
       ],
       returnType: 'React.ReactElement',
-      statements: (`
+      statements: formatCode(`
         const { label, error, change, ...fieldProps } = props;
         const attributes: ${column.field.config.component}Props = Object.assign(
           ${JSON.stringify(column.field.attributes || {}, null, 2)},

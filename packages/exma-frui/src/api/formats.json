@@ -17,7 +17,7 @@
     "lower": {
       "method": "lower",
       "label": "Lowercase",
-      "component": "FormatText",
+      "component": "Text",
       "attributes": {
         "show": false,
         "fixed": {
@@ -31,7 +31,7 @@
     "upper": {
       "method": "upper",
       "label": "Uppercase",
-      "component": "FormatText",
+      "component": "Text",
       "attributes": {
         "show": false,
         "fixed": {
@@ -45,7 +45,7 @@
     "capital": {
       "method": "capital",
       "label": "Capitalized",
-      "component": "FormatText",
+      "component": "Text",
       "attributes": {
         "show": false,
         "fixed": {
@@ -59,7 +59,7 @@
     "char": {
       "method": "char",
       "label": "Character Length",
-      "component": "FormatOverflow",
+      "component": "Overflow",
       "attributes": {
         "show": false,
         "fixed": {
@@ -83,7 +83,7 @@
     "word": {
       "method": "word",
       "label": "Word Length",
-      "component": "FormatOverflow",
+      "component": "Overflow",
       "attributes": {
         "show": false,
         "fixed": {
@@ -110,7 +110,7 @@
     "number": {
       "method": "number",
       "label": "Number",
-      "component": "FormatNumber",
+      "component": "Number",
       "attributes": {
         "show": false,
         "fixed": {},
@@ -125,7 +125,7 @@
     "price": {
       "method": "price",
       "label": "Price",
-      "component": "FormatNumber",
+      "component": "Number",
       "attributes": {
         "show": false,
         "fixed": {
@@ -142,7 +142,7 @@
     "yesno": {
       "method": "yesno",
       "label": "Yes/No",
-      "component": "FormatYesno",
+      "component": "Yesno",
       "attributes": {
         "show": false,
         "fixed": {},
@@ -157,7 +157,7 @@
     "rating": {
       "method": "rating",
       "label": "Star Rating",
-      "component": "FormatRating",
+      "component": "Rating",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -171,7 +171,7 @@
     "date": {
       "method": "date",
       "label": "Date",
-      "component": "FormatDate",
+      "component": "Date",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -183,7 +183,7 @@
     "relative": {
       "method": "relative",
       "label": "Relative Date",
-      "component": "FormatDate",
+      "component": "Date",
       "attributes": {
         "show": true,
         "fixed": {
@@ -197,7 +197,7 @@
     "rel": {
       "method": "rel",
       "label": "Short Relative Date",
-      "component": "FormatDate",
+      "component": "Date",
       "attributes": {
         "show": true,
         "fixed": {
@@ -213,7 +213,7 @@
     "html": {
       "method": "html",
       "label": "Raw HTML",
-      "component": "FormatHTML",
+      "component": "HTML",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -237,7 +237,7 @@
     "markdown": {
       "method": "markdown",
       "label": "Markdown",
-      "component": "FormatMarkdown",
+      "component": "Markdown",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -249,7 +249,7 @@
     "color": {
       "method": "color",
       "label": "Color",
-      "component": "FormatColor",
+      "component": "Color",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -261,7 +261,7 @@
     "link": {
       "method": "link",
       "label": "Link",
-      "component": "FormatLink",
+      "component": "Link",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -273,7 +273,7 @@
     "image": {
       "method": "image",
       "label": "Image",
-      "component": "FormatImage",
+      "component": "Image",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -285,7 +285,7 @@
     "email": {
       "method": "email",
       "label": "Email Address",
-      "component": "FormatEmail",
+      "component": "Email",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -297,7 +297,7 @@
     "phone": {
       "method": "phone",
       "label": "Phone Number",
-      "component": "FormatPhone",
+      "component": "Phone",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -311,7 +311,7 @@
     "space": {
       "method": "space",
       "label": "Space Separated",
-      "component": "FormatSeparated",
+      "component": "Separated",
       "attributes": {
         "show": true,
         "fixed": {
@@ -325,7 +325,7 @@
     "comma": {
       "method": "comma",
       "label": "Comma Separated",
-      "component": "FormatSeparated",
+      "component": "Separated",
       "attributes": {
         "show": true,
         "fixed": {
@@ -339,7 +339,7 @@
     "line": {
       "method": "line",
       "label": "Line Separated",
-      "component": "FormatSeparated",
+      "component": "Separated",
       "attributes": {
         "show": true,
         "fixed": {
@@ -353,7 +353,7 @@
     "ol": {
       "method": "ol",
       "label": "Ordered List",
-      "component": "FormatList",
+      "component": "List",
       "attributes": {
         "show": true,
         "fixed": {
@@ -367,7 +367,7 @@
     "ul": {
       "method": "ul",
       "label": "Unordered List",
-      "component": "FormatList",
+      "component": "List",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -379,7 +379,7 @@
     "taglist": {
       "method": "taglist",
       "label": "Taglist",
-      "component": "FormatTaglist",
+      "component": "Taglist",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -391,7 +391,7 @@
     "metadata": {
       "method": "metadata",
       "label": "Metadata (key: val)",
-      "component": "FormatMetadata",
+      "component": "Metadata",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -403,7 +403,7 @@
     "table": {
       "method": "table",
       "label": "Table",
-      "component": "FormatTable",
+      "component": "Table",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -415,7 +415,7 @@
     "carousel": {
       "method": "carousel",
       "label": "Image Carousel",
-      "component": "FormatImagelist",
+      "component": "Imagelist",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -427,7 +427,7 @@
     "pretty": {
       "method": "pretty",
       "label": "JSON Pretty",
-      "component": "FormatJSON",
+      "component": "JSON",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -452,7 +452,7 @@
     },
     "custom": {
       "method": "custom",
-      "label": "Custom Format",
+      "label": "Custom ",
       "component": false,
       "attributes": {
         "show": false,
@@ -471,7 +471,7 @@
     "formula": {
       "method": "formula",
       "label": "Formula",
-      "component": "FormatFormula",
+      "component": "Formula",
       "attributes": {
         "show": false,
         "fixed": {},

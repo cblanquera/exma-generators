@@ -3,7 +3,7 @@ import type { Project, Directory } from 'ts-morph';
 //helpers
 import Model from '../../../types/Model';
 import { VariableDeclarationKind } from 'ts-morph';
-import { capitalize, camelfy } from '../../../utils';
+import { capitalize, camelfy, formatCode } from '../../../utils';
 
 type Location = Project|Directory;
 
@@ -21,13 +21,13 @@ export default function generateViewFormats(project: Location, name: string, ui 
   const path = `models/${model.name.toLowerCase()}/components/ListFormats.tsx`;
   const source = project.createSourceFile(path, '', { overwrite: true });
   if (columns.length) {
-    //import type { FieldSelectProps, FieldInputProps } from 'frui'
+    //import type { OverflowProps, DateProps } from 'frui-tailwind/formats'
     source.addImportDeclaration({
       isTypeOnly: true,
-      moduleSpecifier: 'frui',
+      moduleSpecifier: `frui-${ui}/formats`,
       namedImports: columns
-      .map(column => `${column.list.config.component}Props`)
-      .filter((value, index, array) => array.indexOf(value) === index)
+        .map(column => `${column.list.config.component}Props`)
+        .filter((value, index, array) => array.indexOf(value) === index)
     });
   }
   //import React from 'react';
@@ -40,10 +40,10 @@ export default function generateViewFormats(project: Location, name: string, ui 
     .filter((value, index, array) => array.indexOf(value) === index)
     .forEach(defaultImport => {
       if (defaultImport) {
-        //import FieldInput from 'frui/tailwind/FieldInput';
+        //import Overflow from 'frui-tailwind/formats/Overflow';
         source.addImportDeclaration({ 
           defaultImport, 
-          moduleSpecifier: `frui/${ui}/${defaultImport}` 
+          moduleSpecifier: `frui-${ui}/formats/${defaultImport}` 
         });
       }
     });
@@ -62,7 +62,7 @@ export default function generateViewFormats(project: Location, name: string, ui 
         { name: 'props', type: 'FormatComponentProps' }
       ],
       returnType: 'React.ReactElement',
-      statements: column.list.config.component ? (`
+      statements: column.list.config.component ? formatCode(`
         const { value, ...others } = props;
         const attributes: ${column.list.config.component}Props = Object.assign(
           ${JSON.stringify(column.list.attributes || {}, null, 2)},
@@ -72,7 +72,7 @@ export default function generateViewFormats(project: Location, name: string, ui 
         return (
           <${column.list.config.component} {...attributes} />
         );
-      `): (`
+      `): formatCode(`
         return (props.value);
       `)
     });

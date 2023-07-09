@@ -19,7 +19,7 @@ export default function generate(project: Location, name: string) {
   //import Validator from '../Validator'
   source.addImportDeclaration({
     defaultImport: 'Validator',
-    moduleSpecifier: '../../types/Validator'
+    moduleSpecifier: '../../Validator'
   });
   //export default function validate(data: Partial<ModelType>)
   source.addFunction({

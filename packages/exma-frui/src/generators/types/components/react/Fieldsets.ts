@@ -3,7 +3,7 @@ import type { Project, Directory } from 'ts-morph';
 //helpers
 import Type from '../../../../types/Type';
 import { VariableDeclarationKind } from 'ts-morph';
-import { capitalize, camelfy } from '../../../../utils';
+import { capitalize, camelfy, formatCode } from '../../../../utils';
 
 type Location = Project|Directory;
 
@@ -26,10 +26,10 @@ export default function generateFieldset(project: Location, name: string) {
   const path = `types/${type.name.toLowerCase()}/components/Fieldsets.tsx`;
   const source = project.createSourceFile(path, '', { overwrite: true });
 
-  //import type { FieldsProps, FieldsetProps } from 'frui';
+  //import type { FieldsProps, FieldsetProps } from 'frui-react';
   source.addImportDeclaration({
     isTypeOnly: true,
-    moduleSpecifier: 'frui',
+    moduleSpecifier: 'frui-react',
     namedImports: [ 'FieldsProps', 'FieldsetProps' ]
   });
 
@@ -58,10 +58,10 @@ export default function generateFieldset(project: Location, name: string) {
     moduleSpecifier: '../hooks/useFieldsets'
   });
   
-  //import { Button, Fieldset as make } from 'frui/react';
+  //import { Button, Fieldset as make } from 'frui-react';
   source.addImportDeclaration({
-    moduleSpecifier: 'frui/react',
-    namedImports: [ 'Button', 'Fieldset as make' ]
+    moduleSpecifier: 'frui-react',
+    namedImports: [ 'Button', 'fieldset as make' ]
   });
   
   //import { NameField, CurrencyField, PriceField } from './FormFields';
@@ -75,7 +75,7 @@ export default function generateFieldset(project: Location, name: string) {
     isExported: false,
     name: 'Fields',
     parameters: [{ name: 'props', type: `FieldsProps<${typeName}>` }],
-    statements: `
+    statements: formatCode(`
       const { values, index, set } = props;
       //hooks
       const { _ } = useLanguage();
@@ -83,7 +83,7 @@ export default function generateFieldset(project: Location, name: string) {
     
       return (
         <div>
-          <div style={{ marginTop: 4px }}>
+          <div style={{ marginTop: 4px, display: 'flex', alignItems: 'center' }}>
             <h3 style={{ flexGrow: 1 }}>
               {_('${typeLabel} %s', index + 1)}
             </h3>
@@ -104,13 +104,13 @@ export default function generateFieldset(project: Location, name: string) {
                   Array.isArray(paths) ? paths[0] : paths, 
                   value
                 )}
-                defaultValue={value?.[index]?.${column.name}}
+                defaultValue={value?.${column.name}}
               />
             </div>
           `)).join('\n')}
         </div>
       );
-    `
+    `)
   });
 
   //const Fieldset = make<Line>(Fields);

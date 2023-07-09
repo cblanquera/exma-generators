@@ -4,7 +4,7 @@ import type { Project, Directory } from 'ts-morph';
 import Model from '../../../types/Model';
 import Type from '../../../types/Type';
 import { VariableDeclarationKind } from 'ts-morph';
-import { capitalize, camelfy } from '../../../utils';
+import { capitalize, camelfy, formatCode } from '../../../utils';
 
 type Location = Project|Directory;
 
@@ -18,14 +18,13 @@ export default function generateViewFormats(project: Location, name: string, ui 
   const source = project.createSourceFile(path, '', { overwrite: true });
   
   if (columns.length) {
-    //import type { FieldSelectProps, FieldInputProps } from 'frui'
+    //import type { SelectProps, InputProps } from 'frui-tailwind/fields'
     source.addImportDeclaration({
       isTypeOnly: true,
-      moduleSpecifier: 'frui',
+      moduleSpecifier: `frui-${ui}/fields`,
       namedImports: columns
-      .filter(column => column.field.method !== 'fieldset')
-      .map(column => `${column.field.config.component}Props`)
-      .filter((value, index, array) => array.indexOf(value) === index)
+        .map(column => `${column.field.config.component}Props`)
+        .filter((value, index, array) => array.indexOf(value) === index)
     });
   }
   columns
@@ -48,7 +47,7 @@ export default function generateViewFormats(project: Location, name: string, ui 
   //import Control from 'frui/tailwind/Control';
   source.addImportDeclaration({
     defaultImport: 'Control',
-    moduleSpecifier: `frui/${ui}/Control`
+    moduleSpecifier: `frui-${ui}/Control`
   });
   columns
     .filter(column => column.field.method !== 'fieldset')
@@ -56,10 +55,10 @@ export default function generateViewFormats(project: Location, name: string, ui 
     .filter((value, index, array) => array.indexOf(value) === index)
     .forEach(defaultImport => {
       if (defaultImport) {
-        //import FieldInput from 'frui/tailwind/FieldInput';
+        //import FieldInput from 'frui-tailwind/fields/Input';
         source.addImportDeclaration({ 
           defaultImport, 
-          moduleSpecifier: `frui/${ui}/${defaultImport}` 
+          moduleSpecifier: `frui-${ui}/fields/${defaultImport}` 
         });
       }
     });
@@ -102,7 +101,7 @@ export default function generateViewFormats(project: Location, name: string, ui 
         { name: 'props', type: 'FormComponentProps' }
       ],
       returnType: 'React.ReactElement',
-      statements: (`
+      statements: formatCode(`
         const { label, error, change, ...fieldProps } = props;
         const attributes: ${column.field.config.component}Props = Object.assign(
           ${JSON.stringify(column.field.attributes || {}, null, 2)},
@@ -136,7 +135,7 @@ export default function generateViewFormats(project: Location, name: string, ui 
         { name: 'props', type: 'FormComponentProps' }
       ],
       returnType: 'React.ReactElement',
-      statements: (`
+      statements: formatCode(`
         const { label, error, change, ...fieldProps } = props;
         const attributes: Record<string, any> = Object.assign(
           ${JSON.stringify(column.field.attributes || {}, null, 2)},

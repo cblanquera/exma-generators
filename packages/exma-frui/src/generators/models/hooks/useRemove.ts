@@ -2,7 +2,7 @@
 import type { Project, Directory } from 'ts-morph';
 //helpers
 import Model from '../../../types/Model';
-import { capitalize, camelfy } from '../../../utils';
+import { capitalize, camelfy, formatCode } from '../../../utils';
 
 type Location = Project|Directory;
 
@@ -38,7 +38,7 @@ export default function generate(project: Location, name: string) {
       { name: 'path', type: 'string' },
       { name: 'options', type: 'AxiosRequestConfig', initializer: '{}' }
     ],
-    statements: (`
+    statements: formatCode(`
       const action = useFetch<${typeName}>(method, path, options);
       const handlers = {
         send() {

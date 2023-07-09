@@ -2,7 +2,7 @@
 import type { Project, Directory } from 'ts-morph';
 //helpers
 import Model from '../../../../types/Model';
-import { capitalize, camelfy } from '../../../../utils';
+import { capitalize, camelfy, formatCode } from '../../../../utils';
 
 type Location = Project|Directory;
 
@@ -40,9 +40,9 @@ export default function generate(project: Location, name: string) {
     moduleSpecifier: '../../../hooks/useStripe',
     defaultImport: 'useStripe'
   });
-  //import { Table, Thead, Trow, Tcol } from 'frui/tailwind/Table';
+  //import { Table, Thead, Trow, Tcol } from 'frui-tailwind/Table';
   source.addImportDeclaration({
-    moduleSpecifier: 'frui/tailwind/Table',
+    moduleSpecifier: 'frui-tailwind/Table',
     namedImports: [ 'Table', 'Trow', 'Tcol' ]
   });
   if (columns.length) {
@@ -71,7 +71,7 @@ export default function generate(project: Location, name: string) {
       { name: 'props', type: 'DefaultViewProps' }
     ],
     returnType: 'React.ReactElement',
-    statements: (`
+    statements: formatCode((`
       const { stripes, data } = props
       const { _ } = useLanguage();
       const stripe = useStripe(stripes[0], stripes[1]);
@@ -89,7 +89,7 @@ export default function generate(project: Location, name: string) {
           `)).join('\n')}
         </Table>
       );
-    `).replace(/[\n\r]+/, "\n")
+    `).replace(/[\n\r]+/, "\n"))
   });
 
   source.formatText();

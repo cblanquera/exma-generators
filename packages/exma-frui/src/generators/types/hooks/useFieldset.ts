@@ -2,7 +2,7 @@
 import type { Project, Directory } from 'ts-morph';
 //helpers
 import Type from '../../../types/Type';
-import { capitalize } from '../../../utils';
+import { capitalize, formatCode } from '../../../utils';
 
 type Location = Project|Directory;
 
@@ -11,7 +11,7 @@ export default function generateFieldset(project: Location, name: string) {
   const capital = capitalize(type.name);
   const typeName = capital;
   
-  const path = `types/${type.name.toLowerCase()}/hooks/useFieldset.tsx`;
+  const path = `types/${type.name.toLowerCase()}/hooks/useFieldset.ts`;
   const source = project.createSourceFile(path, '', { overwrite: true });
 
   //import type { Item } from "../types";
@@ -33,7 +33,7 @@ export default function generateFieldset(project: Location, name: string) {
     isDefaultExport: true,
     name: 'useFieldset',
     parameters: [ { name: 'config', type: 'FieldsetProps' } ],
-    statements: (`
+    statements: formatCode(`
       const { value, set } = config;
       //handlers
       const handlers = {

@@ -1,7 +1,9 @@
 import type { PluginProps } from 'exma';
+import { format } from 'prettier';
 
+import fs from 'fs';
 import path from 'path';
-import { Project, IndentationText } from 'ts-morph';
+import { Project, IndentationText, QuoteKind } from 'ts-morph';
 import { Loader } from 'exma';
 
 import Enum from './types/Enum';
@@ -48,6 +50,19 @@ import generateTypeTailwindFieldsets from './generators/types/components/tailwin
 import generateTypeHooksUseFieldset from './generators/types/hooks/useFieldset';
 import generateTypeHooksUseFieldsets from './generators/types/hooks/useFieldsets';
 import generateTypeTypes from './generators/types/types';
+
+async function prettify(file: string) {
+  fs.writeFileSync(file, await format(
+    fs.readFileSync(file, 'utf8'), 
+    { 
+      parser: 'typescript', 
+      printWidth: 80,  // Adjust as needed
+      tabWidth: 2,    // Adjust as needed
+      useTabs: false, // Adjust as needed
+      singleQuote: true
+    }
+  ));
+}
 
 export default function generate({ config, schema, cli }: PluginProps) {
   if (!config.output) {
@@ -101,7 +116,8 @@ export default function generate({ config, schema, cli }: PluginProps) {
       sourceMap: true, // Generates corresponding '.map' file.
     },
     manipulationSettings: {
-      indentationText: IndentationText.TwoSpaces
+      indentationText: IndentationText.TwoSpaces,
+      quoteKind: QuoteKind.Single,
     }
   });
 
@@ -161,6 +177,36 @@ export default function generate({ config, schema, cli }: PluginProps) {
   //if you want ts, tsx files
   if (lang == 'ts') {
     project.saveSync();
+    prettify(`${root}/index.ts`);
+    for (const model in schema.model) {
+      prettify(`${root}/models/${model.toLowerCase()}/types.ts`);
+      prettify(`${root}/models/${model.toLowerCase()}/validate.ts`);
+      prettify(`${root}/models/${model.toLowerCase()}/hooks/useCreate.ts`);
+      prettify(`${root}/models/${model.toLowerCase()}/hooks/useDetail.ts`);
+      prettify(`${root}/models/${model.toLowerCase()}/hooks/useRemove.ts`);
+      prettify(`${root}/models/${model.toLowerCase()}/hooks/useSearch.ts`);
+      prettify(`${root}/models/${model.toLowerCase()}/hooks/useUpdate.ts`);
+      prettify(`${root}/models/${model.toLowerCase()}/components/DefaultFilters.tsx`);
+      prettify(`${root}/models/${model.toLowerCase()}/components/DefaultForm.tsx`);
+      prettify(`${root}/models/${model.toLowerCase()}/components/DefaultTable.tsx`);
+      prettify(`${root}/models/${model.toLowerCase()}/components/DefaultView.tsx`);
+      prettify(`${root}/models/${model.toLowerCase()}/components/FilterFields.tsx`);
+      prettify(`${root}/models/${model.toLowerCase()}/components/FormFields.tsx`);
+      prettify(`${root}/models/${model.toLowerCase()}/components/ListFormats.tsx`);
+      prettify(`${root}/models/${model.toLowerCase()}/components/ViewFormats.tsx`);
+    }
+
+    for (const type in schema.type) {
+      prettify(`${root}/types/${type.toLowerCase()}/types.ts`);
+      prettify(`${root}/types/${type.toLowerCase()}/components/Fieldset.tsx`);
+      prettify(`${root}/types/${type.toLowerCase()}/components/Fieldsets.tsx`);
+      prettify(`${root}/types/${type.toLowerCase()}/components/FormFields.tsx`);
+      prettify(`${root}/types/${type.toLowerCase()}/components/ListFormats.tsx`);
+      prettify(`${root}/types/${type.toLowerCase()}/components/ViewFormats.tsx`);
+      prettify(`${root}/types/${type.toLowerCase()}/hooks/useFieldset.ts`);
+      prettify(`${root}/types/${type.toLowerCase()}/hooks/useFieldsets.ts`);
+    }
+    
   //if you want js, d.ts files
   } else {
     project.emit();

@@ -2,7 +2,7 @@
 import type { Project, Directory } from 'ts-morph';
 //helpers
 import Type from '../../../../types/Type';
-import { capitalize, camelfy } from '../../../../utils';
+import { capitalize, camelfy, formatCode } from '../../../../utils';
 
 type Location = Project|Directory;
 
@@ -51,7 +51,7 @@ export default function generateFieldset(project: Location, name: string) {
     isDefaultExport: true,
     name: 'Fieldset',
     parameters: [{ name: 'props', type: 'FieldsetProps' }],
-    statements: `
+    statements: formatCode(`
       //hooks
       const { _ } = useLanguage();
       const { handlers, value } = useFieldset(props);
@@ -72,7 +72,7 @@ export default function generateFieldset(project: Location, name: string) {
           `)).join('\n')}
         </div>
       );
-    `
+    `)
   });
 
   source.formatText();

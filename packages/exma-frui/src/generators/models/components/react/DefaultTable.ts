@@ -2,7 +2,7 @@
 import type { Project, Directory } from 'ts-morph';
 //helpers
 import Model from '../../../../types/Model';
-import { capitalize, camelfy } from '../../../../utils';
+import { capitalize, camelfy, formatCode } from '../../../../utils';
 
 type Location = Project|Directory;
 
@@ -45,9 +45,9 @@ export default function generate(project: Location, name: string) {
     moduleSpecifier: '../../../hooks/useStripe',
     defaultImport: 'useStripe'
   });
-  //import { Table, Thead, Trow, Tcol } from 'frui/react/Table';
+  //import { Table, Thead, Trow, Tcol } from 'frui-react/Table';
   source.addImportDeclaration({
-    moduleSpecifier: 'frui/react/Table',
+    moduleSpecifier: 'frui-react/Table',
     namedImports: [ 'Table', 'Thead', 'Trow', 'Tcol' ]
   });
   //import { RoleFormat, ActiveFormat, ... } from './ListFormats';
@@ -76,7 +76,7 @@ export default function generate(project: Location, name: string) {
       { name: 'props', type: 'DefaultTableProps' }
     ],
     returnType: 'React.ReactElement',
-    statements: (`
+    statements: formatCode(`
       const { filters, handlers, stripes, rows } = props
       const { _ } = useLanguage();
       const stripe = useStripe(stripes[0], stripes[1]);

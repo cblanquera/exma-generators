@@ -82,7 +82,7 @@
     "color": {
       "method": "color",
       "label": "Color Field",
-      "component": "FieldInput",
+      "component": "Input",
       "attributes": {
         "show": false,
         "fixed": { "type": "color" },
@@ -193,7 +193,7 @@
     "email": {
       "method": "email",
       "label": "Email Field",
-      "component": "FieldInput",
+      "component": "Input",
       "attributes": {
         "show": true,
         "fixed": {
@@ -307,7 +307,7 @@
     "input": {
       "method": "input",
       "label": "Input Field",
-      "component": "FieldInput",
+      "component": "Input",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -470,7 +470,7 @@
     "mask": {
       "method": "mask",
       "label": "Input Mask",
-      "component": "FieldMask",
+      "component": "Mask",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -635,7 +635,7 @@
     "phone": {
       "method": "phone",
       "label": "Phone Field",
-      "component": "FieldInput",
+      "component": "Input",
       "attributes": {
         "show": true,
         "fixed": {
@@ -750,7 +750,7 @@
     "password": {
       "method": "password",
       "label": "Password Field",
-      "component": "FieldPassword",
+      "component": "Password",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -848,7 +848,7 @@
     "slug": {
       "method": "slug",
       "label": "Slug Field",
-      "component": "FieldSlug",
+      "component": "Slug",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -958,7 +958,7 @@
     "text": {
       "method": "text",
       "label": "Text Field",
-      "component": "FieldInput",
+      "component": "Input",
       "attributes": {
         "show": true,
         "fixed": {
@@ -1125,7 +1125,7 @@
     "url": {
       "method": "url",
       "label": "URL Field",
-      "component": "FieldInput",
+      "component": "Input",
       "attributes": {
         "show": true,
         "fixed": {
@@ -1241,7 +1241,7 @@
     "code": {
       "method": "code",
       "label": "Code Editor",
-      "component": "FieldCodeEditor",
+      "component": "CodeEditor",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -1355,7 +1355,7 @@
     "markdown": {
       "method": "markdown",
       "label": "Markdown Editor",
-      "component": "FieldMarkdown",
+      "component": "Markdown",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -1469,7 +1469,7 @@
     "textarea": {
       "method": "textarea",
       "label": "Textarea",
-      "component": "FieldTextarea",
+      "component": "Textarea",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -1583,7 +1583,7 @@
     "wysiwyg": {
       "method": "wysiwyg",
       "label": "WYSIWYG Editor",
-      "component": "FieldWysiwyg",
+      "component": "Wysiwyg",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -1699,7 +1699,7 @@
     "integer": {
       "method": "integer",
       "label": "Integer Field",
-      "component": "FieldNumber",
+      "component": "Number",
       "attributes": {
         "show": true,
         "fixed": {
@@ -1831,7 +1831,7 @@
     "number": {
       "method": "number",
       "label": "Number Field",
-      "component": "FieldNumber",
+      "component": "Number",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -1960,7 +1960,7 @@
     "price": {
       "method": "price",
       "label": "Price Field",
-      "component": "FieldNumber",
+      "component": "Number",
       "attributes": {
         "show": true,
         "fixed": {
@@ -2079,7 +2079,7 @@
     "range": {
       "method": "range",
       "label": "Range Field",
-      "component": "FieldRange",
+      "component": "Range",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -2208,7 +2208,7 @@
     "rating": {
       "method": "rating",
       "label": "Rating Field",
-      "component": "FieldRating",
+      "component": "Rating",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -2323,7 +2323,7 @@
     "small": {
       "method": "small",
       "label": "Small Field",
-      "component": "FieldNumber",
+      "component": "Number",
       "attributes": {
         "show": true,
         "fixed": {
@@ -2434,7 +2434,7 @@
     "date": {
       "method": "date",
       "label": "Date Field",
-      "component": "FieldDate",
+      "component": "Date",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -2562,7 +2562,7 @@
     "datetime": {
       "method": "datetime",
       "label": "Datetime Field",
-      "component": "FieldDatetime",
+      "component": "Datetime",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -2690,7 +2690,7 @@
     "time": {
       "method": "time",
       "label": "Time Field",
-      "component": "FieldTime",
+      "component": "Time",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -2820,7 +2820,7 @@
     "autocomplete": {
       "method": "autocomplete",
       "label": "Autocomplete Field",
-      "component": "FieldAutocomplete",
+      "component": "Autocomplete",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -2984,7 +2984,7 @@
     "checkbox": {
       "method": "checkbox",
       "label": "Checkbox Field",
-      "component": "FieldCheckbox",
+      "component": "Checkbox",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -3081,7 +3081,7 @@
     "checklist": {
       "method": "checklist",
       "label": "Checklist",
-      "component": "FieldChecklist",
+      "component": "Checklist",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -3197,7 +3197,7 @@
     "country": {
       "method": "country",
       "label": "Country Field",
-      "component": "FieldCountry",
+      "component": "Country",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -3301,7 +3301,7 @@
     "currency": {
       "method": "currency",
       "label": "Currency Field",
-      "component": "FieldCurrency",
+      "component": "Currency",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -3405,7 +3405,7 @@
     "radio": {
       "method": "radio",
       "label": "Radiolist Field",
-      "component": "FieldRadio",
+      "component": "Radio",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -3576,7 +3576,7 @@
     "select": {
       "method": "select",
       "label": "Select Field",
-      "component": "FieldSelect",
+      "component": "Select",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -3747,7 +3747,7 @@
     "selectlist": {
       "method": "selectlist",
       "label": "Multi Select Field",
-      "component": "FieldSelectlist",
+      "component": "Selectlist",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -3863,7 +3863,7 @@
     "switch": {
       "method": "switch",
       "label": "Switch Field",
-      "component": "FieldSwitch",
+      "component": "Switch",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -3962,7 +3962,7 @@
     "file": {
       "method": "file",
       "label": "File Field",
-      "component": "FieldFile",
+      "component": "File",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -4074,7 +4074,7 @@
     "filelist": {
       "method": "filelist",
       "label": "Filelist Field",
-      "component": "FieldFilelist",
+      "component": "Filelist",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -4184,7 +4184,7 @@
     "image": {
       "method": "image",
       "label": "Image Field",
-      "component": "FieldImage",
+      "component": "Image",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -4296,7 +4296,7 @@
     "imagelist": {
       "method": "imagelist",
       "label": "Imagelist Field",
-      "component": "FieldImagelist",
+      "component": "Imagelist",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -4408,7 +4408,7 @@
     "json": {
       "method": "json",
       "label": "JSON Field",
-      "component": "FieldJSON",
+      "component": "JSON",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -4520,7 +4520,7 @@
     "metadata": {
       "method": "metadata",
       "label": "Metadata Fieldset",
-      "component": "FieldMetadata",
+      "component": "Metadata",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -4630,7 +4630,7 @@
     "table": {
       "method": "table",
       "label": "Table Fieldset",
-      "component": "FieldTable",
+      "component": "Table",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -4734,7 +4734,7 @@
     "taglist": {
       "method": "taglist",
       "label": "Taglist Field",
-      "component": "FieldTaglist",
+      "component": "Taglist",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -4844,7 +4844,7 @@
     "textlist": {
       "method": "textlist",
       "label": "Textlist Fieldset",
-      "component": "FieldTextlist",
+      "component": "Textlist",
       "attributes": {
         "show": true,
         "fixed": {},
@@ -4954,7 +4954,7 @@
     "fieldset": {
       "method": "fieldset",
       "label": "Cutsom Fieldset",
-      "component": "FieldFieldset",
+      "component": "Fieldset",
       "attributes": {
         "show": true,
         "fixed": {},

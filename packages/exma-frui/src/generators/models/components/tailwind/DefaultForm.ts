@@ -2,7 +2,7 @@
 import type { Project, Directory } from 'ts-morph';
 //helpers
 import Model from '../../../../types/Model';
-import { capitalize, camelfy } from '../../../../utils';
+import { capitalize, camelfy, formatCode } from '../../../../utils';
 
 type Location = Project|Directory;
 
@@ -48,15 +48,15 @@ export default function generate(project: Location, name: string) {
     moduleSpecifier: 'r22n',
     namedImports: [ 'useLanguage' ]
   });
-  //import Loader from 'frui/tailwind/Loader';
+  //import Loader from 'frui-tailwind/Loader';
   source.addImportDeclaration({
     defaultImport: 'Loader',
-    moduleSpecifier: 'frui/tailwind/Loader'
+    moduleSpecifier: 'frui-tailwind/Loader'
   });
-  //import Button from 'frui/tailwind/Button';
+  //import Button from 'frui-tailwind/Button';
   source.addImportDeclaration({
     defaultImport: 'Button',
-    moduleSpecifier: 'frui/tailwind/Button'
+    moduleSpecifier: 'frui-tailwind/Button'
   });
   if (columns.length) {
     //import { RoleField, ActiveField, ... } from './FormFields';
@@ -85,7 +85,7 @@ export default function generate(project: Location, name: string) {
     parameters: [
       { name: 'props', type: 'DefaultFormProps' }
     ],
-    statements: (`
+    statements: formatCode((`
       const { handlers, data, response, status } = props;
       const { _ } = useLanguage();
       return (
@@ -110,7 +110,7 @@ export default function generate(project: Location, name: string) {
           </Button>
         </form>
       );
-    `).replace(/[\n\r]+/, "\n")
+    `).replace(/[\n\r]+/, "\n"))
   });
 
   source.formatText();

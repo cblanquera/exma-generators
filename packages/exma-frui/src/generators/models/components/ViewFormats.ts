@@ -3,7 +3,7 @@ import type { Project, Directory } from 'ts-morph';
 //helpers
 import Model from '../../../types/Model';
 import { VariableDeclarationKind } from 'ts-morph';
-import { capitalize, camelfy } from '../../../utils';
+import { capitalize, camelfy, formatCode } from '../../../utils';
 
 type Location = Project|Directory;
 
@@ -22,10 +22,10 @@ export default function generateViewFormats(project: Location, name: string, ui 
   const source = project.createSourceFile(path, '', { overwrite: true });
   
   if (columns.length > 0) {
-    //import type { FieldSelectProps, FieldInputProps } from 'frui'
+    //import type { OverflowProps, DateProps } from 'frui-tailwind/formats'
     source.addImportDeclaration({
       isTypeOnly: true,
-      moduleSpecifier: 'frui',
+      moduleSpecifier: `frui-${ui}/formats`,
       namedImports: columns
         .map(column => `${column.view.config.component}Props`)
         .filter((value, index, array) => array.indexOf(value) === index)
@@ -41,10 +41,10 @@ export default function generateViewFormats(project: Location, name: string, ui 
     .filter((value, index, array) => array.indexOf(value) === index)
     .forEach(defaultImport => {
       if (defaultImport) {
-        //import FieldInput from 'frui/tailwind/FieldInput';
+        //import Overflow from 'frui-tailwind/formats/Overflow';
         source.addImportDeclaration({ 
           defaultImport, 
-          moduleSpecifier: `frui/${ui}/${defaultImport}` 
+          moduleSpecifier: `frui-${ui}/formats/${defaultImport}` 
         });
       }
     });
@@ -64,9 +64,9 @@ export default function generateViewFormats(project: Location, name: string, ui 
       ],
       returnType: 'React.ReactElement',
       statements: column.view.method === 'none' 
-        || column.view.method === 'escaped' ? (`
+        || column.view.method === 'escaped' ? formatCode(`
         return (props.value);
-      `) : (`
+      `) : formatCode(`
         const { value, ...others } = props;
         const attributes: ${column.view.config.component}Props = Object.assign(
           ${JSON.stringify(column.view.attributes || {}, null, 2)},

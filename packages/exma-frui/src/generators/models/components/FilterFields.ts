@@ -3,7 +3,7 @@ import type { Project, Directory } from 'ts-morph';
 //helpers
 import Model from '../../../types/Model';
 import { VariableDeclarationKind } from 'ts-morph';
-import { capitalize, camelfy } from '../../../utils';
+import { capitalize, camelfy, formatCode } from '../../../utils';
 
 type Location = Project|Directory;
 
@@ -17,13 +17,13 @@ export default function generateViewFormats(project: Location, name: string, ui 
   const source = project.createSourceFile(path, '', { overwrite: true });
   
   if (columns.length) {
-    //import type { FieldSelectProps, FieldInputProps } from 'frui'
+    //import type { SelectProps, InputProps } from 'frui-tailwind/fields'
     source.addImportDeclaration({
       isTypeOnly: true,
-      moduleSpecifier: 'frui',
+      moduleSpecifier: `frui-${ui}/fields`,
       namedImports: columns
-      .map(column => `${column.field.config.component}Props`)
-      .filter((value, index, array) => array.indexOf(value) === index)
+        .map(column => `${column.field.config.component}Props`)
+        .filter((value, index, array) => array.indexOf(value) === index)
     });
   }
   //import React from 'react';
@@ -34,17 +34,17 @@ export default function generateViewFormats(project: Location, name: string, ui 
   //import Control from 'frui/tailwind/Control';
   source.addImportDeclaration({
     defaultImport: 'Control',
-    moduleSpecifier: `frui/${ui}/Control`
+    moduleSpecifier: `frui-${ui}/Control`
   });
   columns
     .map(column => column.field.config.component)
     .filter((value, index, array) => array.indexOf(value) === index)
     .forEach(defaultImport => {
       if (defaultImport) {
-        //import FieldInput from 'frui/tailwind/FieldInput';
+        //import FieldInput from 'frui-tailwind/fields/Input';
         source.addImportDeclaration({ 
           defaultImport, 
-          moduleSpecifier: `frui/${ui}/${defaultImport}` 
+          moduleSpecifier: `frui-${ui}/fields/${defaultImport}` 
         });
       }
     });
@@ -68,7 +68,7 @@ export default function generateViewFormats(project: Location, name: string, ui 
         { name: 'props', type: 'FilterComponentProps' }
       ],
       returnType: 'React.ReactElement',
-      statements: column.spanable ? (`
+      statements: column.spanable ? formatCode(`
         const { label, error, filter, ...fieldProps } = props;
         const attributes: ${column.field.config.component}Props = Object.assign(
           ${JSON.stringify(column.field.attributes || {}, null, 2)},
@@ -87,7 +87,7 @@ export default function generateViewFormats(project: Location, name: string, ui 
             <${column.field.config.component} {...maxAttributes} />
           </Control>
         );
-      `): (`
+      `): formatCode(`
         const { label, error, filter, ...fieldProps } = props;
         const attributes: ${column.field.config.component}Props = Object.assign(
           ${JSON.stringify(column.field.attributes || {}, null, 2)},
@@ -107,12 +107,12 @@ export default function generateViewFormats(project: Location, name: string, ui 
   source.addVariableStatement({
     declarationKind: VariableDeclarationKind.Const,
     declarations: [{
-        name: 'FilterFields',
-        initializer: (`{
-          ${columns
-            .map((column) => `${capitalize(camelfy(column.name))}Filter`)
-            .join(',\n')}
-        }`),
+      name: 'FilterFields',
+      initializer: (`{
+        ${columns
+          .map((column) => `${capitalize(camelfy(column.name))}Filter`)
+          .join(',\n')}
+      }`),
     }]
   });
   source.addExportAssignment({
