@@ -41,7 +41,7 @@ export default function generateFieldset(project: Location, name: string) {
           const clone = [ ...(values || []) ];
           const current = clone[index] as ${typeName};
           //only if message is different
-          if (current[name] !== value) {
+          if (current[name as '${type.columns.map(column => column.name).join("'|'")}'] !== value) {
             clone[index] = { ...current, [name]: value };
             set(clone);
           }

@@ -25,17 +25,17 @@ export default function generateViewFormats(project: Location, name: string, ui 
         .map(column => `${column.field.config.component}Props`)
         .filter((value, index, array) => array.indexOf(value) === index)
     });
+    //import React from 'react';
+    source.addImportDeclaration({
+      defaultImport: 'React',
+      moduleSpecifier: 'react'
+    });
+    //import Control from 'frui/tailwind/Control';
+    source.addImportDeclaration({
+      defaultImport: 'Control',
+      moduleSpecifier: `frui-${ui}/Control`
+    });
   }
-  //import React from 'react';
-  source.addImportDeclaration({
-    defaultImport: 'React',
-    moduleSpecifier: 'react'
-  });
-  //import Control from 'frui/tailwind/Control';
-  source.addImportDeclaration({
-    defaultImport: 'Control',
-    moduleSpecifier: `frui-${ui}/Control`
-  });
   columns
     .map(column => column.field.config.component)
     .filter((value, index, array) => array.indexOf(value) === index)

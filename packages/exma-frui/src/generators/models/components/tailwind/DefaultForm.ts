@@ -38,27 +38,22 @@ export default function generate(project: Location, name: string) {
       extendedName
     ].filter((value, index, array) => array.indexOf(value) === index)
   });
-  //import React from 'react';
-  source.addImportDeclaration({
-    defaultImport: 'React',
-    moduleSpecifier: 'react'
-  });
-  //import { useLanguage } from 'r22n';
-  source.addImportDeclaration({
-    moduleSpecifier: 'r22n',
-    namedImports: [ 'useLanguage' ]
-  });
-  //import Loader from 'frui-tailwind/Loader';
-  source.addImportDeclaration({
-    defaultImport: 'Loader',
-    moduleSpecifier: 'frui-tailwind/Loader'
-  });
-  //import Button from 'frui-tailwind/Button';
-  source.addImportDeclaration({
-    defaultImport: 'Button',
-    moduleSpecifier: 'frui-tailwind/Button'
-  });
   if (columns.length) {
+    //import { useLanguage } from 'r22n';
+    source.addImportDeclaration({
+      moduleSpecifier: 'r22n',
+      namedImports: [ 'useLanguage' ]
+    });
+    //import Loader from 'frui-tailwind/Loader';
+    source.addImportDeclaration({
+      defaultImport: 'Loader',
+      moduleSpecifier: 'frui-tailwind/Loader'
+    });
+    //import Button from 'frui-tailwind/Button';
+    source.addImportDeclaration({
+      defaultImport: 'Button',
+      moduleSpecifier: 'frui-tailwind/Button'
+    });
     //import { RoleField, ActiveField, ... } from './FormFields';
     source.addImportDeclaration({
       moduleSpecifier: `./FormFields`,
@@ -85,7 +80,7 @@ export default function generate(project: Location, name: string) {
     parameters: [
       { name: 'props', type: 'DefaultFormProps' }
     ],
-    statements: formatCode((`
+    statements: columns.length ? formatCode((`
       const { handlers, data, response, status } = props;
       const { _ } = useLanguage();
       return (
@@ -110,7 +105,7 @@ export default function generate(project: Location, name: string) {
           </Button>
         </form>
       );
-    `).replace(/[\n\r]+/, "\n"))
+    `).replace(/[\n\r]+/, "\n")): 'return null;'
   });
 
   source.formatText();

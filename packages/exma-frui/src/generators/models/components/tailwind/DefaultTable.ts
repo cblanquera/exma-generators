@@ -31,11 +31,6 @@ export default function generate(project: Location, name: string) {
     moduleSpecifier: '../types',
     namedImports: [ extendedName ]
   });
-  //import React from 'react';
-  source.addImportDeclaration({
-    defaultImport: 'React',
-    moduleSpecifier: 'react'
-  });
   //import { useLanguage } from 'r22n';
   source.addImportDeclaration({
     moduleSpecifier: 'r22n',
@@ -81,7 +76,10 @@ export default function generate(project: Location, name: string) {
     ],
     returnType: 'React.ReactElement',
     statements: formatCode((`
-      const { filters, handlers, stripes, rows } = props
+      ${model.sortables.length 
+        ? 'const { filters, handlers, stripes, rows } = props;'
+        : 'const { stripes, rows } = props;'
+      }
       const { _ } = useLanguage();
       const stripe = useStripe(stripes[0], stripes[1]);
       return (
@@ -91,7 +89,7 @@ export default function generate(project: Location, name: string) {
               return (`
                 <Thead className="text-right text-blue-600" noWrap stickyTop>
                   <span className="cursor-pointer" onClick={() => handlers.sort('${column.name}')}>
-                    _('${column.label}')
+                    {_('${column.label}')}
                   </span>
                   {!filters['sort[${column.name}]'] ? <i className="ml-1 text-xs fas fa-sort"></i>: null}
                   {filters['sort[${column.name}]'] === 'asc' ? <i className="ml-1 text-xs fas fa-sort-up"></i>: null}
@@ -101,7 +99,7 @@ export default function generate(project: Location, name: string) {
             }
             return (`
               <Thead noWrap stickyTop>
-                _('${column.label}')
+                {_('${column.label}')}
               </Thead>
             `)
           }).join('\n')}

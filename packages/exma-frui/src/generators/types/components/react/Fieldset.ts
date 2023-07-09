@@ -22,12 +22,6 @@ export default function generateFieldset(project: Location, name: string) {
     namedImports: [ 'FieldsetProps' ]
   });
   
-  //import React from "react";
-  source.addImportDeclaration({
-    defaultImport: 'React',
-    moduleSpecifier: 'react'
-  });
-  
   //import { useLanguage } from "r22n";
   source.addImportDeclaration({
     moduleSpecifier: 'r22n',
@@ -57,7 +51,7 @@ export default function generateFieldset(project: Location, name: string) {
       const { handlers, value } = useFieldset(props);
     
       return (
-        <div>
+        <div style={props.inline ? { display: 'flex', alignItems: 'end' }: {}}>
           ${columns.map((column, i) => (`
             <div style={{ marginTop: 4px, position: 'relative', zIndex: ${5000 - (i + 1)} }}>
               <${capitalize(camelfy(column.name))}Field

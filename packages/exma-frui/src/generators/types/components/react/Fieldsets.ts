@@ -40,12 +40,6 @@ export default function generateFieldset(project: Location, name: string) {
     namedImports: [ typeName ]
   });
 
-  //import React from 'react';
-  source.addImportDeclaration({
-    defaultImport: 'React',
-    moduleSpecifier: 'react'
-  });
-
   //import { useLanguage } from 'r22n';
   source.addImportDeclaration({
     moduleSpecifier: 'r22n',
@@ -76,30 +70,44 @@ export default function generateFieldset(project: Location, name: string) {
     name: 'Fields',
     parameters: [{ name: 'props', type: `FieldsProps<${typeName}>` }],
     statements: formatCode(`
-      const { values, index, set } = props;
+      const { data, values, index, set } = props;
       //hooks
       const { _ } = useLanguage();
       const { handlers, value } = useFieldsets({ values, index, set});
-    
+      //check layout
+      const inline = data?.layout;
+      //this is used to find out the first non-empty value
+      let i = 0
+      for (; i < (values?.length || 0); i++) {
+        if (values?.[i] !== undefined) {
+          break;
+        }
+      }
+
+      const inlineWrapper = inline ? { alignItems: 'end', display: 'flex' }: {};
+
+      //render
       return (
-        <div>
-          <div style={{ marginTop: 4px, display: 'flex', alignItems: 'center' }}>
-            <h3 style={{ flexGrow: 1 }}>
-              {_('${typeLabel} %s', index + 1)}
-            </h3>
-            <Button 
-              transparent
-              danger
-              style={{ padding: '4px 8px' }}
-              onClick={handlers.remove}
-            >
-              &times;
-            </Button>
-          </div>
+        <div style={{ ...inlineWrapper, position: 'relative', zIndex: 5000 - index }}>
+          {!inline && (
+            <div style={{ marginTop: 4px, display: 'flex', alignItems: 'center' }}>
+              <h3 style={{ flexGrow: 1 }}>
+                {_('${typeLabel} %s', index + 1)}
+              </h3>
+              <Button 
+                transparent
+                danger
+                style={{ padding: '4px 8px' }}
+                onClick={handlers.remove}
+              >
+                &times;
+              </Button>
+            </div>
+          )}
           ${columns.map((column, i) => (`
-            <div style={{ marginTop: 4px, position: 'relative', zIndex: ${5000 - (i + 1)} }}>
+            <div style={{ flexGrow: 1, marginTop: 4px, position: 'relative', zIndex: ${5000 - (i + 1)} }}>
               <${capitalize(camelfy(column.name))}Field
-                label={_('${column.label}')}
+                label={!inline || index === i ? _('${column.label}') : undefined}
                 change={(paths, value) => handlers.change(
                   Array.isArray(paths) ? paths[0] : paths, 
                   value
@@ -108,6 +116,16 @@ export default function generateFieldset(project: Location, name: string) {
               />
             </div>
           `)).join('\n')}
+          {inline && (
+            <Button 
+              transparent
+              danger
+              style={{ padding: '4px 8px' }}
+              onClick={handlers.remove}
+            >
+              &times;
+            </Button>
+          )}
         </div>
       );
     `)

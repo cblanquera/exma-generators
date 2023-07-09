@@ -22,20 +22,23 @@ export default function generateViewFormats(project: Location, name: string, ui 
       isTypeOnly: true,
       moduleSpecifier: `frui-${ui}/fields`,
       namedImports: columns
-      .map(column => `${column.field.config.component}Props`)
-      .filter((value, index, array) => array.indexOf(value) === index)
+        .filter(column => column.field.method !== 'fieldset')
+        .map(column => `${column.field.config.component}Props`)
+        .filter((value, index, array) => array.indexOf(value) === index)
     });
   }
-  //import React from 'react';
-  source.addImportDeclaration({
-    defaultImport: 'React',
-    moduleSpecifier: 'react'
-  });
-  //import Control from 'frui-tailwind/Control';
-  source.addImportDeclaration({
-    defaultImport: 'Control',
-    moduleSpecifier: `frui-${ui}/Control`
-  });
+  if (columns.length) {
+    //import React from 'react';
+    source.addImportDeclaration({
+      defaultImport: 'React',
+      moduleSpecifier: 'react'
+    });
+    //import Control from 'frui-tailwind/Control';
+    source.addImportDeclaration({
+      defaultImport: 'Control',
+      moduleSpecifier: `frui-${ui}/Control`
+    });
+  }
   columns
     .map(column => column.field.config.component)
     .filter((value, index, array) => array.indexOf(value) === index)

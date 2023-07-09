@@ -38,27 +38,22 @@ export default function generate(project: Location, name: string) {
       extendedName
     ].filter((value, index, array) => array.indexOf(value) === index)
   });
-  //import React from 'react';
-  source.addImportDeclaration({
-    defaultImport: 'React',
-    moduleSpecifier: 'react'
-  });
-  //import { useLanguage } from 'r22n';
-  source.addImportDeclaration({
-    moduleSpecifier: 'r22n',
-    namedImports: [ 'useLanguage' ]
-  });
-  //import Loader from 'frui-react/Loader';
-  source.addImportDeclaration({
-    defaultImport: 'Loader',
-    moduleSpecifier: 'frui-react/Loader'
-  });
-  //import Button from 'frui-react/Button';
-  source.addImportDeclaration({
-    defaultImport: 'Button',
-    moduleSpecifier: 'frui-react/Button'
-  });
   if (columns.length) {
+    //import { useLanguage } from 'r22n';
+    source.addImportDeclaration({
+      moduleSpecifier: 'r22n',
+      namedImports: [ 'useLanguage' ]
+    });
+    //import Loader from 'frui-react/Loader';
+    source.addImportDeclaration({
+      defaultImport: 'Loader',
+      moduleSpecifier: 'frui-react/Loader'
+    });
+    //import Button from 'frui-react/Button';
+    source.addImportDeclaration({
+      defaultImport: 'Button',
+      moduleSpecifier: 'frui-react/Button'
+    });
     //import { RoleField, ActiveField, ... } from './FormFields';
     source.addImportDeclaration({
       moduleSpecifier: `./FormFields`,
@@ -86,7 +81,7 @@ export default function generate(project: Location, name: string) {
       { name: 'props', type: 'DefaultFormProps' }
     ],
     returnType: 'React.ReactElement',
-    statements: formatCode(`
+    statements: columns.length ? formatCode(`
       const { handlers, data, response, status } = props;
       const { _ } = useLanguage();
       return (
@@ -111,7 +106,7 @@ export default function generate(project: Location, name: string) {
           </Button>
         </form>
       );
-    `)
+    `): 'return null;'
   });
 
   source.formatText();

@@ -23,6 +23,7 @@ export default function generateViewFormats(project: Location, name: string, ui 
       isTypeOnly: true,
       moduleSpecifier: `frui-${ui}/fields`,
       namedImports: columns
+        .filter(column => column.field.method !== 'fieldset')
         .map(column => `${column.field.config.component}Props`)
         .filter((value, index, array) => array.indexOf(value) === index)
     });
@@ -39,16 +40,18 @@ export default function generateViewFormats(project: Location, name: string, ui 
         namedImports: [type.name]
       }); 
     });
-  //import React from 'react';
-  source.addImportDeclaration({
-    defaultImport: 'React',
-    moduleSpecifier: 'react'
-  });
-  //import Control from 'frui/tailwind/Control';
-  source.addImportDeclaration({
-    defaultImport: 'Control',
-    moduleSpecifier: `frui-${ui}/Control`
-  });
+  if (columns.length) {
+    //import React from 'react';
+    source.addImportDeclaration({
+      defaultImport: 'React',
+      moduleSpecifier: 'react'
+    });
+    //import Control from 'frui/tailwind/Control';
+    source.addImportDeclaration({
+      defaultImport: 'Control',
+      moduleSpecifier: `frui-${ui}/Control`
+    });
+  }
   columns
     .filter(column => column.field.method !== 'fieldset')
     .map(column => column.field.config.component)
@@ -136,11 +139,14 @@ export default function generateViewFormats(project: Location, name: string, ui 
       ],
       returnType: 'React.ReactElement',
       statements: formatCode(`
-        const { label, error, change, ...fieldProps } = props;
+        const { label, error, change, addLabel, ...fieldProps } = props;
         const attributes: Record<string, any> = Object.assign(
           ${JSON.stringify(column.field.attributes || {}, null, 2)},
           fieldProps || {}
         );
+        if (addLabel) {
+          attributes.label = addLabel;
+        }
         attributes.error = Boolean(error);
         attributes.onUpdate = (value: ${valueType}) => change('${column.name}', value);
         return (

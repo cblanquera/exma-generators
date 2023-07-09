@@ -12,8 +12,9 @@
     "sourceMap": false,
     "strict": true,
     "target": "es6",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "jsx": "react-jsx"
   },
-  "include": [ "src/**/*.ts" ],
+  "include": [ "shared/**/*.ts", "shared/**/*.tsx" ],
   "exclude": [ "dist", "docs", "node_modules", "test"]
 }

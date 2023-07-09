@@ -21,7 +21,7 @@
     "tsconfig.json"
   ],
   "dependencies": {
-    "exma": "0.0.14"
+    "exma": "0.0.21"
   },
   "devDependencies": {
     "@types/node": "20.2.5",

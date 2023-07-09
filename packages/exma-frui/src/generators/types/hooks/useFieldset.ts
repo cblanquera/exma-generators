@@ -25,7 +25,7 @@ export default function generateFieldset(project: Location, name: string) {
   source.addTypeAlias({
     isExported: true,
     name: 'FieldsetProps',
-    type: `{ value?: ${typeName}, set: Function }`
+    type: `{ value?: ${typeName}, inline?: boolean, set: Function }`
   });
   
   //export default function useFieldset(config: FieldsetProps) {...}
@@ -38,7 +38,7 @@ export default function generateFieldset(project: Location, name: string) {
       //handlers
       const handlers = {
         change: (name: string, newValue: string | number) => {
-          const current = { ...value };
+          const current: Record<string, any> = { ...value };
           //only if value is different
           if (current[name] !== newValue) {
             set({ ...value, [name]: value });

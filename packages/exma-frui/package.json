@@ -1,6 +1,6 @@
 {
   "name": "exma-frui",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "license": "MIT",
   "description": "Parses an exma schema to FREE react UI.",
   "author": "Chris <chris@incept.asia>",
