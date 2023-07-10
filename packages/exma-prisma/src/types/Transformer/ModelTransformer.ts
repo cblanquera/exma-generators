@@ -48,7 +48,7 @@ export default class ModelTransformer {
       column.id ? '@id' : '',
       column.unique ? '@unique' : '',
       column.stampable ? '@updatedAt' : '',
-      column.default ? `@default(${column.default})` : ''
+      column.default !== null ? `@default(${column.default})` : ''
     ].filter(attribute => attribute.length > 0);
     return `${name} ${type} ${attributes.join(' ')}`;
   }

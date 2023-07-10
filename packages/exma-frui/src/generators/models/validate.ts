@@ -34,12 +34,15 @@ export default function generate(project: Location, name: string) {
       ${model.columns.map(column => column.validators.map(validator => {
         const required = validator.method === 'required';
         const method = `Validator.${validator.method}`;
+        const precheck = required 
+          ? 'strict && '
+          : `Validator.isset(data.${column.name}) && `;
         const parameters = [ 
           `data.${column.name}`,
           ...validator.parameters.map(arg => JSON.stringify(arg))
         ];
         return (`
-          if (${required ? 'strict && ': ''}!${method}(${parameters.join(', ')})) {
+          if (${precheck}!${method}(${parameters.join(', ')})) {
             errors.${column.name} = '${validator.message}';
           }
         `)

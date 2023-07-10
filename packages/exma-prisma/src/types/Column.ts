@@ -40,21 +40,22 @@ export default class Column {
    */
   get default() {
     //@default("some value")
-    if (Array.isArray(this._config.attributes.default)
-      && typeof this._config.attributes.default[0] === 'string'
-    ) {
+    if (Array.isArray(this._config.attributes.default)) {
       const defaults = this._config.attributes.default[0];
-      if (Enum.get(this._config.type) && typeof defaults === 'string') {
+      if (typeof defaults === 'boolean' || typeof defaults === 'number') {
         return defaults;
-      }
-      if (defaults.length > 0) {
-        if (/\(\)$/.test(defaults || '')) {
+      } else if(typeof defaults === 'string') {
+        if (Enum.get(this._config.type) && typeof defaults === 'string') {
           return defaults;
+        } else if (defaults.length > 0) {
+          if (/\(\)$/.test(defaults || '')) {
+            return defaults;
+          }
+          if (this.typeliteral === 'DateTime') {
+            return null;
+          }
+          return `"${defaults}"`;
         }
-        if (this.typeliteral === 'DateTime') {
-          return null;
-        }
-        return `"${defaults}"`;
       }
       return null;
     }
