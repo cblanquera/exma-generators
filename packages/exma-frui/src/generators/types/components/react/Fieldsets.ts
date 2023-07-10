@@ -75,7 +75,7 @@ export default function generateFieldset(project: Location, name: string) {
       const { _ } = useLanguage();
       const { handlers, value } = useFieldsets({ values, index, set});
       //check layout
-      const inline = data?.layout;
+      const inline = data?.layout === 'inline';
       //this is used to find out the first non-empty value
       let i = 0
       for (; i < (values?.length || 0); i++) {
@@ -85,6 +85,7 @@ export default function generateFieldset(project: Location, name: string) {
       }
 
       const inlineWrapper = inline ? { alignItems: 'end', display: 'flex' }: {};
+      const inlineRow = inline ? { margin: '0 1px 1px 0' }: { marginTop: '4px' };
 
       //render
       return (
@@ -105,7 +106,7 @@ export default function generateFieldset(project: Location, name: string) {
             </div>
           )}
           ${columns.map((column, i) => (`
-            <div style={{ flexGrow: 1, marginTop: 4px, position: 'relative', zIndex: ${5000 - (i + 1)} }}>
+            <div style={{ ...inlineRow, flexGrow: 1, position: 'relative', zIndex: ${5000 - (i + 1)} }}>
               <${capitalize(camelfy(column.name))}Field
                 label={!inline || index === i ? _('${column.label}') : undefined}
                 change={(paths, value) => handlers.change(
@@ -120,7 +121,7 @@ export default function generateFieldset(project: Location, name: string) {
             <Button 
               transparent
               danger
-              style={{ padding: '4px 8px' }}
+              style={{ padding: '4px 8px', marginBottom: '1px' }}
               onClick={handlers.remove}
             >
               &times;

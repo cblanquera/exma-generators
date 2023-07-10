@@ -75,7 +75,7 @@ export default function generateFieldset(project: Location, name: string) {
       const { _ } = useLanguage();
       const { handlers, value } = useFieldsets({ values, index, set});
       //check layout
-      const inline = data?.layout;
+      const inline = data?.layout === 'inline';
       //this is used to find out the first non-empty value
       let i = 0
       for (; i < (values?.length || 0); i++) {
@@ -102,7 +102,7 @@ export default function generateFieldset(project: Location, name: string) {
             </div>
           )}
           ${columns.map((column, i) => (`
-            <div className="mt-2 flex-grow relative z-[${5000 - (i + 1)}]">
+            <div className={\`\${inline? 'mb-0.5 mr-0.5': 'mt-2'} flex-grow relative z-[${5000 - (i + 1)}]\`}>
               <${capitalize(camelfy(column.name))}Field
                 label={!inline || index === i ? _('${column.label}') : undefined}
                 change={(paths, value) => handlers.change(
@@ -117,7 +117,7 @@ export default function generateFieldset(project: Location, name: string) {
             <Button 
               transparent
               danger
-              className="px-4 py-2"
+              className="px-4 py-2 mb-0.5"
               onClick={handlers.remove}
             >
               &times;

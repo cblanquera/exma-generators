@@ -139,14 +139,11 @@ export default function generateViewFormats(project: Location, name: string, ui 
       ],
       returnType: 'React.ReactElement',
       statements: formatCode(`
-        const { label, error, change, addLabel, ...fieldProps } = props;
+        const { label, error, change, ...fieldProps } = props;
         const attributes: Record<string, any> = Object.assign(
           ${JSON.stringify(column.field.attributes || {}, null, 2)},
           fieldProps || {}
         );
-        if (addLabel) {
-          attributes.label = addLabel;
-        }
         attributes.error = Boolean(error);
         attributes.onUpdate = (value: ${valueType}) => change('${column.name}', value);
         return (
