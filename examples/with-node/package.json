@@ -1,6 +1,6 @@
 {
   "name": "with-node",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "private": true,
   "scripts": {
     "generate": "exma",
@@ -11,7 +11,7 @@
     "@paralleldrive/cuid2": "2.2.1",
     "axios": "1.4.0",
     "cuid": "3.0.0",
-    "frui": "0.0.22",
+    "frui": "0.0.23",
     "nanoid": "4.0.2",
     "r22n": "1.0.3",
     "react": "^18.2.0",
@@ -20,8 +20,8 @@
   "devDependencies": {
     "@types/node": "20.2.5",
     "exma": "0.0.14",
-    "exma-frui": "0.0.21",
-    "exma-prisma": "0.0.21",
+    "exma-frui": "0.0.22",
+    "exma-prisma": "0.0.22",
     "exma-typescript": "0.0.14",
     "ts-node": "10.9.1",
     "typescript": "5.0.4"

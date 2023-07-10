@@ -312,22 +312,6 @@ escalade@^3.1.1:
   resolved "https://registry.yarnpkg.com/escalade/-/escalade-3.1.1.tgz#d8cfdc7000965c5a0174b4a82eaa5c0552742e40"
   integrity sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==
 
-exma-frui@0.0.14:
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/exma-frui/-/exma-frui-0.0.14.tgz#c62cac5963e650b065a43e2082473c6196b90844"
-  integrity sha512-oSQy2Mc8aGCjxs4IH8JCjnU9AeGf6rcLVMFpOFgi8xw5mrFD7WnLmD5oybl6FT2e9GVK5t7qdqJgl5xLeXxmHg==
-  dependencies:
-    "@inceptjs/types" "0.0.29"
-    exma "0.0.14"
-    ts-morph "18.0.0"
-
-exma-prisma@0.0.14:
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/exma-prisma/-/exma-prisma-0.0.14.tgz#7e7ccf62ae6f1da29e2634478e37b0621a1f5686"
-  integrity sha512-UeqZEv4tk0IlR2t3SSBk4VtlREiAhPwF/kMcWnkEIpKn76Tf5EMsBPC+u5x1VtlRq0SL+V4fu7Rl0vguniGoYw==
-  dependencies:
-    exma "0.0.14"
-
 exma-typescript@0.0.14:
   version "0.0.14"
   resolved "https://registry.yarnpkg.com/exma-typescript/-/exma-typescript-0.0.14.tgz#77c4dd36ebccd71dc799d2c814e6f03faa2079f8"
@@ -383,71 +367,38 @@ form-data@^4.0.0:
     combined-stream "^1.0.8"
     mime-types "^2.1.12"
 
-frui-core@0.0.20:
-  version "0.0.20"
-  resolved "https://registry.yarnpkg.com/frui-core/-/frui-core-0.0.20.tgz#b4ecfa7aaa510c5b80b732ed4def2f68edca4f0c"
-  integrity sha512-tmbuCiDdmAzeHURtYcZfvW5X1lzNVWTdBRhAo3AA2aetwelSTQary0fBZzJAJgrFK59AyX6VAriymDYKOxum1w==
+frui-core@0.0.23:
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/frui-core/-/frui-core-0.0.23.tgz#3ea048087962c09ad9925c77bc67d25b1f942e44"
+  integrity sha512-pF5+8j3EkKBT2BoF6G2XhrRVF/Nvq+Q49bxOnTqmiv0gvoLzTUhIjYyOAwQYU4lNAcrW9fO0IEDbdCTsV09Q4g==
 
-frui-core@0.0.22:
-  version "0.0.22"
-  resolved "https://registry.yarnpkg.com/frui-core/-/frui-core-0.0.22.tgz#6132faf04fedd726e254a0cd8ae34d5bfb2acfd8"
-  integrity sha512-/5TRy3RKyZUjz+IkxPXvYsY9iVV9F08dKuD4xFe941vo2CSh62ucvQCd5k5OCeObVLTjRIs4FNwcXhyez/8FpA==
-
-frui-react@0.0.20:
-  version "0.0.20"
-  resolved "https://registry.yarnpkg.com/frui-react/-/frui-react-0.0.20.tgz#b1273fe2863feeedcd1e667eac865378b674bbb4"
-  integrity sha512-xeJhz+2+CPAZ/2PcSFq5RVaTTEtPm0YRNk36X3QV7qE+++hQIXlG0+hhbrMIdJwYXgrHidOH5uwzYxxv+v4iaA==
+frui-react@0.0.23:
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/frui-react/-/frui-react-0.0.23.tgz#b9bd361a60d16ec49a5717300af3ab6a7a88545f"
+  integrity sha512-5n80dRswdByk3SV2L2sg9/NUcK8nPoMxt7qiHKpy0O+MHTHQ3vyQi/nPd4eMZAAw7VZUeuHqNg3Z0TBuFZ35Cw==
   dependencies:
-    frui-core "0.0.20"
+    frui-core "0.0.23"
     inputmask "5.0.8"
     markdown-to-jsx "7.2.0"
     moment "2.29.4"
 
-frui-react@0.0.22:
-  version "0.0.22"
-  resolved "https://registry.yarnpkg.com/frui-react/-/frui-react-0.0.22.tgz#0b435ea0337d8181122b2c15a044dfe33caee7a6"
-  integrity sha512-D++hgkkiVTcd4ccT1ejMc9RcsntW1eL//Xkv86GmdmtBBN37bH6iHpVuPYymPpXt5EDJpkFcwUsYgYVwPgyG9g==
+frui-tailwind@0.0.23:
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/frui-tailwind/-/frui-tailwind-0.0.23.tgz#b8e17d8f7682a1bfe5deac1b0b3deba69d00bbe9"
+  integrity sha512-eoBF/r8ZXZCAI+dkzmWR6nYNVoDdXjHsc7y3wb7TWefK/fm8rGBSi75gqZD2eUqC4r1uRX5mlj9Nffafproq7g==
   dependencies:
-    frui-core "0.0.22"
+    frui-core "0.0.23"
     inputmask "5.0.8"
     markdown-to-jsx "7.2.0"
     moment "2.29.4"
 
-frui-tailwind@0.0.20:
-  version "0.0.20"
-  resolved "https://registry.yarnpkg.com/frui-tailwind/-/frui-tailwind-0.0.20.tgz#72b0c3b5adb4a9ae08f4d50962805a48a72aa71c"
-  integrity sha512-e294+UXhGGWygrQbzpERfZ0zfnEsj2bHAjUUDBimXUdHCvwfQVhieEfXbVJr4LxFdIDGiMm011dN+Y2jM/8chQ==
+frui@0.0.23:
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/frui/-/frui-0.0.23.tgz#b534d673f42bcd9b5338187e59c6c0c4cefbe2ae"
+  integrity sha512-rvuBbIWw72fjFzDTZ6tI1ykQ5tqef7G57neFg/mwM43dTl2EwL+qasYKJGrnenc9P20JtwZ8BXyyiuQOKB72xg==
   dependencies:
-    frui-core "0.0.20"
-    inputmask "5.0.8"
-    markdown-to-jsx "7.2.0"
-    moment "2.29.4"
-
-frui-tailwind@0.0.22:
-  version "0.0.22"
-  resolved "https://registry.yarnpkg.com/frui-tailwind/-/frui-tailwind-0.0.22.tgz#2256fa37f33c80209c528b0b03330295b9814a0f"
-  integrity sha512-A+Eoo1vt4RuFRsLxR1c2D3GJYcqIwbVJWnSobqzMzINlcFFOvPNbHEsV3zYB2URVx6py/No5Ych8Lv68mH079g==
-  dependencies:
-    frui-core "0.0.22"
-    inputmask "5.0.8"
-    markdown-to-jsx "7.2.0"
-    moment "2.29.4"
-
-frui@0.0.21:
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/frui/-/frui-0.0.21.tgz#8bd07aaa0d5b787e1fcbf08ff871ba14f7e8b9ba"
-  integrity sha512-mbvfnp+jP9pyXR1LOFvSFtejm85Gqx/8hVUo7zXhF/fnDFLRAtXQbyud85vftOS8JLJapYC/GnJr9gf1u6Dvig==
-  dependencies:
-    frui-react "0.0.20"
-    frui-tailwind "0.0.20"
-
-frui@0.0.22:
-  version "0.0.22"
-  resolved "https://registry.yarnpkg.com/frui/-/frui-0.0.22.tgz#fcf0499c6232876d54ab5765e3314a7d51f7577a"
-  integrity sha512-SNOu6I/8NrcGFHox0qxiZuv5R1jojiD/TB6qCEmoHLaVUejh8+9D1QHIRbXbG6Zh4erdtP7Gl4/+fuJHgkXbQA==
-  dependencies:
-    frui-react "0.0.22"
-    frui-tailwind "0.0.22"
+    frui-react "0.0.23"
+    frui-tailwind "0.0.23"
 
 get-caller-file@^2.0.5:
   version "2.0.5"

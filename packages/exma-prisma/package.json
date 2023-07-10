@@ -1,6 +1,6 @@
 {
   "name": "exma-prisma",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "license": "MIT",
   "description": "Parses an exma schema to a prisma schema.",
   "author": "Chris <chris@incept.asia>",
@@ -21,7 +21,7 @@
     "tsconfig.json"
   ],
   "dependencies": {
-    "exma": "0.0.21"
+    "exma": "0.0.14"
   },
   "devDependencies": {
     "@types/node": "20.2.5",

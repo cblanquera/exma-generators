@@ -1,6 +1,6 @@
 {
   "name": "exma-frui",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "license": "MIT",
   "description": "Parses an exma schema to FREE react UI.",
   "author": "Chris <chris@incept.asia>",
@@ -28,7 +28,7 @@
   },
   "peerDependencies": {
     "axios": "^1.4.0",
-    "frui": "^0.0.22",
+    "frui": "^0.0.23",
     "r22n": "^1.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
@@ -38,7 +38,7 @@
     "@types/react": "18.0.26",
     "@types/react-dom": "18.0.10",
     "axios": "1.4.0",
-    "frui": "0.0.21",
+    "frui": "0.0.23",
     "r22n": "1.0.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
