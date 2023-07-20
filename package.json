@@ -8,8 +8,11 @@
     "build": "npm run build:frui && npm run build:prisma",
     "build:frui": "cd packages/exma-frui && npm run build",
     "build:prisma": "cd packages/exma-prisma && npm run build",
-    "generate": "cd examples/with-node && npm run generate",
-    "test": "cd examples/with-node && npm run build"
+    "generate": "npm run generate:node && npm run generate:next",
+    "generate:node": "cd examples/with-node && npm run generate",
+    "generate:next": "cd examples/with-nextjs && npm run generate",
+    "test": "cd examples/with-node && npm run build",
+    "dev": "cd examples/with-nextjs && npm run dev"
   },
   "devDependencies": {
     "concurrently": "7.6.0"

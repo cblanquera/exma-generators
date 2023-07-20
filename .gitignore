@@ -131,3 +131,4 @@ dist
 
 # custom
 examples/with-node/shared
+examples/with-nextjs/shared
